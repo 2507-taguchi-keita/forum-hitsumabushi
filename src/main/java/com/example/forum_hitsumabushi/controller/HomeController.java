@@ -1,4 +1,5 @@
 package com.example.forum_hitsumabushi.controller;
 
-public class TopController {
+public class HomeController {
+    syy
 }
