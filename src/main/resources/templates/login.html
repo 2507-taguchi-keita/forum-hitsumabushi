@@ -1,11 +1,62 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <link th:href="@{/css/style.css}" rel="stylesheet">
-    <title>TOP</title>
-</head>
-<body>
 
-</body>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <link th:href="@{/css/style.css}" rel="stylesheet">
+        <title>ログイン</title>
+    </head>
+
+    <body>
+        <div class="login">
+            <h1>ログイン</h1>
+
+            <!-- ログインエラー表示 -->
+            <div th:if="${loginError != null}">
+                <p th:text="${loginError}" style="color: red;"></p>
+                <br>
+            </div>
+
+            <form action="/login" method="post" th:object="${userForm}">
+                <!-- アカウント名 -->
+                <div class="input-account">
+                    <input class="input-area" type="text" placeholder="アカウント名" th:field="*{account}">
+
+                    <!-- 入力エラー表示 -->
+                    <div th:if="${#fields.hasErrors('account')}" style="color:red;">
+                        <p th:errors="*{account}"></p>
+                    </div>
+                </div>
+
+                <!-- パスワード -->
+                <div class="input-password">
+                    <input id="password" class="input-area" type="password" placeholder="パスワード" th:field="*{password}">
+
+                    <div class="radio-pwVisible">
+                        <input id="pwVisible" type="checkbox" onclick="passwordVisibility()" >
+                        <label>パスワード表示</label>
+                    </div>
+
+                    <!-- 入力エラー表示 -->
+                    <div th:if="${#fields.hasErrors('password')}" style="color:red;">
+                        <p th:errors="*{password}"></p>
+                    </div>
+                </div>
+
+                <!-- ログインボタン -->
+                <button class="btn-login" type="submit">ログイン</button>
+            </form>
+        </div>
+
+
+        <!-- パスワードの表示/非表示を切り替え -->
+        <script>
+            function passwordVisibility() {
+                const password = document.getElementById("password");
+                const checkbox = document.getElementById("pwVisible");
+
+                password.type = checkbox.checked ? "text" : "password";
+            }
+        </script>
+    </body>
 </html>
