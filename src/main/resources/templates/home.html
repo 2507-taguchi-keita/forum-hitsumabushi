@@ -3,9 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <link th:href="@{/css/style.css}" rel="stylesheet">
-    <title>TOP</title>
+    <title>ホーム画面</title>
 </head>
 <body>
+<div class="header-contents">
+    <div class="header" th:if="${loginUser != null}">
+        <form th:action="@{/logout}" method="post">
+            <input class="button-logout" type="button" value="ログアウト">
+        </form>
+        <a th:if="${isSoumuJinji}" th:href="@{/admin/users}" class="user-manage-btn">ユーザ管理</a>
+    </div>
+</div>
+<div class="main-contens">
+    <h1 class="title">掲示板</h1>
+    <br>
+    <div class="button-new">
+        <a th:href="@{/new}"><span>新規投稿</span></a>
+    </div>
+    <br>
+    <div class="filtered-posts">
+        <label>開始日 <input type="date" name="fromDate"></label>
+        <label>終了日 <input type="date" name="toDate"></label>
+        <label>カテゴリー <input type="text" name="category" placeholder="部分一致"></label>
+        <button type="submit">絞り込み</button>
+        <!--<form th:action="@{/home}" method="get" th:object="${filter}">--
+            <label>開始日 <input type="date" th:field="*{fromDate}"></label>
+            <label>終了日 <input type="date" th:field="*{toDate}"></label>
+            <label>カテゴリー <input type="text" th:field="*{category}" placeholder="部分一致"></label>
+            <button type="submit">絞り込み</button>
+        </form>-->
+    </div>
+    <div class="message" th:each="message : ${messages}">
+        <hr />
+        <h3 th:text="${message.title}">件名</h3>
+        <div>本文：<pre th:text="${message.text}"></pre></div>
+        <div>カテゴリー：<span th:text="${message.category}"></span></div>
+        <div>投稿日時：
+            <span th:text="${message.createddate != null ? #temporals.format(message.createddate, 'yyyy/MM/dd HH:mm') : ''"></span>
+        </div>
+        <div>投稿者：<span th:text="${message.user.account}"></span></div>
 
+        <form th:action="@{/delete/{id}(id=${message.id})}" th:method="post" onsubmit="return confirmDelete();">
+            <input type="hidden" name="_method" value="delete"/>
+            <input class="button-delete" type="submit" value="削除">
+        </form>
+    </div>
+    <div class="comment">
+        <h4>コメント</h4>
+        <form th:action="@{/delete/0}" th:method="post" onsubmit="return confirmDelete();">
+        <!--<form th:action="@{/delete/{id}(id=${message.id})}" th:method="post" onsubmit="return confirmDelete();">-->
+            <input type="hidden" name="_method" value="delete"/>
+            <input class="button-delete" type="submit" value="削除">
+        </form>
+    </div>
+    <!-- 返信フォーム
+    <form th:action="@{/comment/{messageId}(messageId=${message.id})}" method="post" th:object="${commentForm}">
+        <textarea class="tweet-box" th:field="*{comment}" size="20" maxlength="200"></textarea><br/>
+        <span th:if="${session.messageId != null and session.messageId == message.id}" th:errors="*{comment}" style="color: red"></span><br/>
+        <input type="hidden" th:field="*{messageId}" th:value="${message.id}" />
+        <input type="submit" value="返信">
+    </form>-->
+    <form th:action="@{/comment/0}" method="post">
+        <textarea class="tweet-box" name="comment" size="20" maxlength="200"></textarea><br/>
+        <input type="hidden" name="messageId" value="0" />
+        <input type="submit" value="返信">
+    </form>
+</div>
+<script>
+    function confirmDelete() {
+        return confirm("本当に削除しますか？");
+    }
+</script>
 </body>
 </html>

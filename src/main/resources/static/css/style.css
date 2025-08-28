@@ -1,0 +1,42 @@
+.title {
+    text-align: center;
+    margin-bottom: 10px;
+    background-color: #fff;
+}
+
+body {
+    min-width: 1000px;
+    padding: 30px;
+    background-color: #f0f0f0;
+}
+
+/*新規投稿ボタン*/
+.button-new a {
+    background-color: #fff;
+     border: double 9px #3cb371;
+     color: #3cb371;
+     border-radius: 10px;
+     padding: 10px 80px;
+     text-decoration: none;
+     font-size: 1.1em;
+     font-weight: bold;
+     display: inline-block;
+     cursor: pointer;
+}
+.button-new a:hover {
+    color: #3cb371;
+    background-color: #f0fff0;
+    cursor: pointer;
+}
+
+/*ユーザ管理ボタン*/
+.header-contents .header a.user-manage-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+/*コメントテキストボックス*/
+.main-contents form .form-area .tweet-box {
+    width: 500px;
+}
