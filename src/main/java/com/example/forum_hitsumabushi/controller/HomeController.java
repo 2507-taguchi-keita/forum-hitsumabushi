@@ -1,9 +1,6 @@
 package com.example.forum_hitsumabushi.controller;
 
-import com.example.forum_hitsumabushi.controller.form.UserCommentForm;
-import com.example.forum_hitsumabushi.controller.form.UserForm;
-import com.example.forum_hitsumabushi.controller.form.UserMessageForm;
-import com.example.forum_hitsumabushi.repository.entity.User;
+import com.example.forum_hitsumabushi.controller.form.*;
 import com.example.forum_hitsumabushi.service.CommentService;
 import com.example.forum_hitsumabushi.service.MessageService;
 import com.example.forum_hitsumabushi.service.UserService;
@@ -11,10 +8,12 @@ import com.example.forum_hitsumabushi.controller.form.UserForm;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.ModelAndView;
-import java.security.Principal;
-import java.util.List;
 
 @Controller
 public class HomeController {
@@ -27,7 +26,8 @@ public class HomeController {
 
 
     @GetMapping("/")
-    public ModelAndView home(Principal principal,HttpSession session) {
+    //public ModelAndView home(Principal principal){
+    public ModelAndView home(Model model, HttpSession session) {
         //String account = principal.getName();
         ModelAndView mav = new ModelAndView();
 
@@ -37,11 +37,36 @@ public class HomeController {
             return new ModelAndView("forward:/login");
         }
 
-        mav.addObject("loginUser", user);
         //mav.addObject("isSoumuJinji", userService.isSoumuJinji(account));
         mav.addObject("comments", commentService.findAllComment());
         mav.addObject("messages", messageService.findAllUserMessages());
+
+        UserForm loginUser = (UserForm) session.getAttribute("loginUser");
+        model.addAttribute("loginUser", loginUser);
+
         mav.setViewName("/home");
         return mav;
+    }
+
+    // 新規投稿画面の表示
+    @GetMapping("/new")
+    public ModelAndView newMessage(ModelMap model) {
+        ModelAndView mav = new ModelAndView();
+
+        // Flashスコープの messageForm に値が返ってきているかのチェック
+        // 値なし＝初回アクセス（初期化）、値あり＝Flashスコープの値を代入（投稿入力に関するバリデーションでリダイレクトされた場合）
+        if (!model.containsAttribute("messageForm")) {
+            model.addAttribute("messageForm", new MessageForm());
+        }
+
+        mav.setViewName("/new");
+        return mav;
+    }
+
+    // 投稿の削除
+    @DeleteMapping("/delete/{id}")
+    public ModelAndView deleteMessage(@PathVariable Integer id){
+        messageService.deleteMessage(id);
+        return new ModelAndView("redirect:/");
     }
 }

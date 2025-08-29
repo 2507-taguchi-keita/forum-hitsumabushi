@@ -42,10 +42,12 @@
         </div>
         <div>投稿者：<span th:text="${message.account}"></span></div>
         <br>
-        <form th:action="@{/delete/{id}(id=${message.id})}" th:method="post" onsubmit="return confirmDelete();">
-            <input type="hidden" name="_method" value="delete"/>
-            <input class="button-delete" type="submit" value="削除">
-        </form>
+        <div th:if="${loginUser.id == message.userId}">
+            <form th:action="@{/delete/{id}(id=${message.id})}" th:method="post" onsubmit="return confirmDelete();">
+                <input type="hidden" name="_method" value="delete"/>
+                <input class="button-delete" type="submit" value="削除">
+            </form>
+        </div>
     </div>
     <h4>コメント</h4>
     <!-- 返信フォーム

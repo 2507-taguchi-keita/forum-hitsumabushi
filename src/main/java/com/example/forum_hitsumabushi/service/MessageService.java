@@ -1,19 +1,30 @@
 package com.example.forum_hitsumabushi.service;
 
+import com.example.forum_hitsumabushi.controller.form.MessageForm;
 import com.example.forum_hitsumabushi.controller.form.UserMessageForm;
+import com.example.forum_hitsumabushi.repository.CommentRepository;
 import com.example.forum_hitsumabushi.repository.MessageRepository;
+import com.example.forum_hitsumabushi.repository.UserRepository;
+import com.example.forum_hitsumabushi.repository.entity.Message;
+import com.example.forum_hitsumabushi.repository.entity.User;
 import com.example.forum_hitsumabushi.service.dto.UserMessage;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class MessageService {
 
     @Autowired
+    UserRepository userRepository;
+    @Autowired
     MessageRepository messageRepository;
+    @Autowired
+    CommentRepository commentRepository;
 
     //投稿全件取得処理
     public List<UserMessageForm> findAllUserMessages(){
@@ -33,6 +44,8 @@ public class MessageService {
         List<UserMessageForm> userComments = new ArrayList<>();
         for (UserMessage result : results) {
             UserMessageForm userMessage = new UserMessageForm();
+
+            userMessage.setId(result.getId());
             userMessage.setAccount(result.getAccount());
             userMessage.setName(result.getName());
             userMessage.setBranchId(result.getBranchId());
@@ -46,5 +59,41 @@ public class MessageService {
             userComments.add(userMessage);
         }
         return userComments;
+    }
+
+    // 投稿を追加する処理
+    public void saveMessage(MessageForm reqMessage) {
+        Message saveMessage = setMessageEntity(reqMessage);
+        messageRepository.save(saveMessage);
+    }
+
+    private Message setMessageEntity(MessageForm reqMessage) {
+        Message message = new Message();
+
+        // Entity(Message)がuser_idカラムをUser型で使ってるので型を変えるための処理
+        Integer userId = reqMessage.getUserId();
+        Optional<User> optionalUser = userRepository.findById(userId);
+        if (optionalUser.isPresent()) {
+            User user = optionalUser.get();
+            message.setUser(user);
+        } else {
+            // ユーザーが見つからなかった場合の例外処理
+            throw new IllegalArgumentException("ユーザーが見つかりません。id: " + userId);
+        }
+
+        // データセット
+        message.setId(reqMessage.getId());
+        message.setTitle(reqMessage.getTitle());
+        message.setText(reqMessage.getText());
+        message.setCategory(reqMessage.getCategory());
+        message.setCreatedDate(reqMessage.getCreatedDate());
+        message.setUpdatedDate(reqMessage.getUpdatedDate());
+        return message;
+    }
+
+    @Transactional
+    public void deleteMessage(Integer id) {
+        //commentRepository.deleteByContentId(id);
+        messageRepository.deleteById(id);
     }
 }
