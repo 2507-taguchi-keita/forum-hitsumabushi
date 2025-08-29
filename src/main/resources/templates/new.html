@@ -1,11 +1,68 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <link th:href="@{/css/style.css}" rel="stylesheet">
-    <title>TOP</title>
-</head>
-<body>
 
-</body>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <link th:href="@{/css/style.css}" rel="stylesheet">
+        <title>新規投稿</title>
+    </head>
+
+    <body>
+        <div class="page-new">
+            <h1>新規投稿</h1>
+
+            <div class="main-contents">
+                <form method="post" action="/add" th:object="${messageForm}">
+                    <!-- 件名 -->
+                    <div class="form-title">
+                        <label>件名</label>
+                        <br>
+                        <textarea class="input-area" rows="1" th:field="*{title}"></textarea>
+
+                        <!-- 入力エラー表示 -->
+                        <div th:if="${#fields.hasErrors('title')}"
+                             th:errors="*{title}"
+                             style="color:red;">
+                        </div>
+                    </div>
+
+                    <!-- カテゴリー -->
+                    <div class="form-category">
+                        <label>カテゴリー</label>
+                        <br>
+                        <textarea class="input-area" rows="1" th:field="*{category}"></textarea>
+
+                        <!-- 入力エラー表示 -->
+                        <div th:if="${#fields.hasErrors('category')}"
+                             th:errors="*{category}"
+                             style="color:red;">
+                        </div>
+                    </div>
+
+                    <!-- 投稿内容 -->
+                    <div class="form-content">
+                        <label>投稿内容</label>
+                        <br>
+                        <textarea class="input-area" rows="10" th:field="*{text}"></textarea>
+
+                        <!-- 入力エラー表示 -->
+                        <div th:if="${#fields.hasErrors('text')}"
+                             th:errors="*{text}"
+                             style="color:red;">
+                        </div>
+                    </div>
+
+                    <!-- 追加ボタン -->
+                    <button class="btn-add" type="submit">追加</button>
+                </form>
+            </div>
+
+            <div class="btn-return">
+                <form action="/">
+                    <button type="submit">戻る</button>
+                </form>
+            </div>
+        </div>
+
+    </body>
 </html>
