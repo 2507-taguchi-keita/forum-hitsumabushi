@@ -16,8 +16,15 @@ public class MessageService {
     MessageRepository messageRepository;
 
     //投稿全件取得処理
-    public List<UserMessageForm> findAllMessage(){
+    public List<UserMessageForm> findAllUserMessages(){
         List<UserMessage> results = messageRepository.findAllUserMessages();
+        System.out.println("レコードの取得: " + results.size());
+        for (UserMessage m : results) {
+            System.out.println("id=" + m.getId()
+                    + ", title=" + m.getTitle()
+                    + ", text=" + m.getText()
+                    + ", account=" + m.getAccount());
+        }
         return setMessageForm(results);
     }
 

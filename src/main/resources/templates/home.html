@@ -16,7 +16,6 @@
 </div>
 <div class="main-contens">
     <h1 class="title">掲示板</h1>
-    <br>
     <div class="button-new">
         <a th:href="@{/new}"><span>新規投稿</span></a>
     </div>
@@ -39,23 +38,16 @@
         <div>本文：<pre th:text="${message.text}"></pre></div>
         <div>カテゴリー：<span th:text="${message.category}"></span></div>
         <div>投稿日時：
-            <span th:text="${message.createddate != null ? #temporals.format(message.createddate, 'yyyy/MM/dd HH:mm') : ''"></span>
+            <span th:text="${message.createddate != null ? #dates.format(message.createddate, 'yyyy/MM/dd HH:mm') : ''}"></span>
         </div>
-        <div>投稿者：<span th:text="${message.user.account}"></span></div>
-
+        <div>投稿者：<span th:text="${message.account}"></span></div>
+        <br>
         <form th:action="@{/delete/{id}(id=${message.id})}" th:method="post" onsubmit="return confirmDelete();">
             <input type="hidden" name="_method" value="delete"/>
             <input class="button-delete" type="submit" value="削除">
         </form>
     </div>
-    <div class="comment">
-        <h4>コメント</h4>
-        <form th:action="@{/delete/0}" th:method="post" onsubmit="return confirmDelete();">
-        <!--<form th:action="@{/delete/{id}(id=${message.id})}" th:method="post" onsubmit="return confirmDelete();">-->
-            <input type="hidden" name="_method" value="delete"/>
-            <input class="button-delete" type="submit" value="削除">
-        </form>
-    </div>
+    <h4>コメント</h4>
     <!-- 返信フォーム
     <form th:action="@{/comment/{messageId}(messageId=${message.id})}" method="post" th:object="${commentForm}">
         <textarea class="tweet-box" th:field="*{comment}" size="20" maxlength="200"></textarea><br/>
@@ -63,11 +55,31 @@
         <input type="hidden" th:field="*{messageId}" th:value="${message.id}" />
         <input type="submit" value="返信">
     </form>-->
-    <form th:action="@{/comment/0}" method="post">
-        <textarea class="tweet-box" name="comment" size="20" maxlength="200"></textarea><br/>
-        <input type="hidden" name="messageId" value="0" />
-        <input type="submit" value="返信">
-    </form>
+    <div class="comment-form">
+        <form th:action="@{/comment/0}" method="post">
+            <textarea class="tweet-box" name="comment" size="20" maxlength="200"></textarea><br/>
+            <input type="hidden" name="messageId" value="0" />
+            <div class="comment-buttons">
+                <input type="submit" value="返信" class="reply-btn">
+                <button type="submit" formaction="/delete/0" formmethod="post" class="button-delete"
+                        onclick="return confirmDelete();">削除</button>
+            </div>
+        </form>
+    </div>
+    <div class="change-deletebutton">
+        <form th:action="@{/comment/0}" method="post" class="button-form">
+            <textarea class="tweet-box" name="comment" size="20" maxlength="200"></textarea><br/>
+            <div class="button-row">
+                <input type="hidden" name="messageId" value="0" />
+                <input type="submit" value="返信" class="reply-btn">
+                <!--<form th:action="@{/delete/{id}(id=${message.id})}" th:method="post" onsubmit="return confirmDelete();">-->
+                <form th:action="@{/delete/0}" th:method="post" onsubmit="return confirmDelete();" class="delete-form">
+                    <input type="hidden" name="_method" value="delete"/>
+                    <input class="button-delete" type="submit" value="削除">
+                </form>
+            </div>
+        </form>
+    </div>
 </div>
 <script>
     function confirmDelete() {

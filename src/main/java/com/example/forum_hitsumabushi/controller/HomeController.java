@@ -33,10 +33,10 @@ public class HomeController {
     //public ModelAndView home(Principal principal){
     public ModelAndView home(){
         //String account = principal.getName();
-        ModelAndView mav = new ModelAndView("/home");
+        ModelAndView mav = new ModelAndView("home");
         //mav.addObject("isSoumuJinji", userService.isSoumuJinji(account));
         mav.addObject("comments", commentService.findAllComment());
-        mav.addObject("messages", messageService.findAllMessage());
+        mav.addObject("messages", messageService.findAllUserMessages());
         return mav;
     }
 }

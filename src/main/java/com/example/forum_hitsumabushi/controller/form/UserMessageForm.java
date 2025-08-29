@@ -9,6 +9,7 @@ import java.util.Date;
 @Setter
 public class UserMessageForm {
 
+    private Integer id;
     private String account;
     private String name;
     private Integer branchId;

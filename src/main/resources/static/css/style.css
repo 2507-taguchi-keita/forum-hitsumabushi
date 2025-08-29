@@ -37,6 +37,20 @@ body {
 }
 
 /*コメントテキストボックス*/
-.main-contents form .form-area .tweet-box {
+.main-contents .change-deletebutton form .tweet-box {
     width: 500px;
+}
+
+/*返信ボタンと削除ボタン*/
+.button-row {
+    display: flex;   /* 横並び */
+    gap: 10px;       /* ボタン間のスペース */
+    margin-top: 5px;
+}
+
+.reply-btn,
+.button-delete {
+    padding: 6px 15px;
+    border-radius: 5px;
+    cursor: pointer;
 }
