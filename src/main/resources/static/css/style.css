@@ -1,3 +1,9 @@
+html, body, div, h1, h2, h3, h4, h5, h6, p,
+table, tbody, thead, tr, th, td {
+    margin: 0;
+    padding: 0;
+}
+
 .title {
     text-align: center;
     margin-bottom: 10px;
@@ -53,4 +59,46 @@ body {
     padding: 6px 15px;
     border-radius: 5px;
     cursor: pointer;
+}
+
+/* ---------------
+ログイン画面
+--------------- */
+.login {
+    width: 500px;
+    margin: 70px auto 0;
+    padding: 30px;
+    box-shadow: 0px 2px 4px 2px #DDD;
+}
+
+.login h1 {
+    margin-bottom: 30px;
+}
+
+.login .input-area {
+    width: 300px;
+    height: 30px;
+    border: solid 1px #000;
+    border-radius: 5px;
+}
+
+.login .input-account {
+    margin-bottom: 20px;
+}
+
+.login .input-password {
+    margin-bottom: 20px;
+}
+
+.login .btn-login {
+    width: 100px;
+    height: 35px;
+    color: #fff;
+    background-color: #1E88E5;
+    border-radius: 5px;
+}
+
+.login .btn-login:hover {
+    cursor: pointer;
+    opacity: 0.7;
 }
