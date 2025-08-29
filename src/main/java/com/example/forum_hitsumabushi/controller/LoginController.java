@@ -54,4 +54,10 @@ public class LoginController {
         session.setAttribute("loginUser", user);
         return new ModelAndView("redirect:/");
     }
+
+    @PostMapping("/logout")
+    public ModelAndView logout(HttpSession session){
+        session.invalidate();
+        return new ModelAndView("redirect:/login");
+    }
 }

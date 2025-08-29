@@ -8,8 +8,8 @@
 <body>
 <div class="header-contents">
     <div class="header" th:if="${loginUser != null}">
-        <form th:action="@{/logout}" method="post">
-            <input class="button-logout" type="button" value="ログアウト">
+        <form th:action="@{/logout}" method="post" onsubmit="return confirmLogout();">
+            <input class="button-logout" type="submit" value="ログアウト">
         </form>
         <a th:if="${isSoumuJinji}" th:href="@{/admin/users}" class="user-manage-btn">ユーザ管理</a>
     </div>
@@ -70,6 +70,9 @@
 <script>
     function confirmDelete() {
         return confirm("本当に削除しますか？");
+    }
+    function confirmLogout() {
+        return confirm("ログアウトしますか？");
     }
 </script>
 </body>

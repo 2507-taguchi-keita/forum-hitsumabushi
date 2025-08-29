@@ -27,8 +27,7 @@ public class HomeController {
 
 
     @GetMapping("/")
-    //public ModelAndView home(Principal principal){
-    public ModelAndView home(HttpSession session) {
+    public ModelAndView home(Principal principal,HttpSession session) {
         //String account = principal.getName();
         ModelAndView mav = new ModelAndView();
 
@@ -38,6 +37,7 @@ public class HomeController {
             return new ModelAndView("forward:/login");
         }
 
+        mav.addObject("loginUser", user);
         //mav.addObject("isSoumuJinji", userService.isSoumuJinji(account));
         mav.addObject("comments", commentService.findAllComment());
         mav.addObject("messages", messageService.findAllUserMessages());
