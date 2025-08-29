@@ -27,7 +27,9 @@ public class HomeController {
 
 
     @GetMapping("/")
+    //public ModelAndView home(Principal principal){
     public ModelAndView home(HttpSession session) {
+        //String account = principal.getName();
         ModelAndView mav = new ModelAndView();
 
         // 初回アクセス時の処理
@@ -36,18 +38,10 @@ public class HomeController {
             return new ModelAndView("forward:/login");
         }
 
-        mav.setViewName("/home");
-        return mav;
-    }
-
-    @GetMapping("/home")
-    //public ModelAndView home(Principal principal){
-    public ModelAndView home(){
-        //String account = principal.getName();
-        ModelAndView mav = new ModelAndView("home");
         //mav.addObject("isSoumuJinji", userService.isSoumuJinji(account));
         mav.addObject("comments", commentService.findAllComment());
         mav.addObject("messages", messageService.findAllUserMessages());
+        mav.setViewName("/home");
         return mav;
     }
 }

@@ -17,9 +17,9 @@ public class Comment {
     private String text;
     private Integer messageId;
     @Column(name = "created_date")
-    private Date createddate;
+    private Date createdDate;
     @Column(name = "updated_date")
-    private Date updateddate;
+    private Date updatedDate;
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;

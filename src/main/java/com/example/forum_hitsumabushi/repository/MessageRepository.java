@@ -16,8 +16,8 @@ public interface MessageRepository extends JpaRepository<Message, Integer> {
             message.title,
             message.text,
             message.category,
-            message.createddate,
-            message.updateddate,
+            message.createdDate,
+            message.updatedDate,
             user.id,
             user.account,
             user.name,
@@ -26,7 +26,7 @@ public interface MessageRepository extends JpaRepository<Message, Integer> {
         )
         FROM Message message
         JOIN message.user user
-        ORDER BY message.createddate DESC
+        ORDER BY message.createdDate DESC
     """)
     List<UserMessage> findAllUserMessages();
 }

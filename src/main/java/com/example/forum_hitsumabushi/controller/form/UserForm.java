@@ -22,6 +22,6 @@ public class UserForm {
     private Integer branchId;
     private Integer departmentId;
     private Integer isStopped;
-    private Date createddate;
-    private Date updateddate;
+    private Date createdDate;
+    private Date updatedDate;
 }

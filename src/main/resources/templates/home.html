@@ -38,7 +38,7 @@
         <div>本文：<pre th:text="${message.text}"></pre></div>
         <div>カテゴリー：<span th:text="${message.category}"></span></div>
         <div>投稿日時：
-            <span th:text="${message.createddate != null ? #dates.format(message.createddate, 'yyyy/MM/dd HH:mm') : ''}"></span>
+            <span th:text="${message.createdDate != null ? #dates.format(message.createdDate, 'yyyy/MM/dd HH:mm') : ''}"></span>
         </div>
         <div>投稿者：<span th:text="${message.account}"></span></div>
         <br>
@@ -63,20 +63,6 @@
                 <input type="submit" value="返信" class="reply-btn">
                 <button type="submit" formaction="/delete/0" formmethod="post" class="button-delete"
                         onclick="return confirmDelete();">削除</button>
-            </div>
-        </form>
-    </div>
-    <div class="change-deletebutton">
-        <form th:action="@{/comment/0}" method="post" class="button-form">
-            <textarea class="tweet-box" name="comment" size="20" maxlength="200"></textarea><br/>
-            <div class="button-row">
-                <input type="hidden" name="messageId" value="0" />
-                <input type="submit" value="返信" class="reply-btn">
-                <!--<form th:action="@{/delete/{id}(id=${message.id})}" th:method="post" onsubmit="return confirmDelete();">-->
-                <form th:action="@{/delete/0}" th:method="post" onsubmit="return confirmDelete();" class="delete-form">
-                    <input type="hidden" name="_method" value="delete"/>
-                    <input class="button-delete" type="submit" value="削除">
-                </form>
             </div>
         </form>
     </div>

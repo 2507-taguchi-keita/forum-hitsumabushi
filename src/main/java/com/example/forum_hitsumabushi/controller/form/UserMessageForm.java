@@ -18,6 +18,6 @@ public class UserMessageForm {
     private String title;
     private String text;
     private String category;
-    private Date createddate;
-    private Date updateddate;
+    private Date createdDate;
+    private Date updatedDate;
 }

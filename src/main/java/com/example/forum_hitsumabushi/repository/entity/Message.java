@@ -18,9 +18,9 @@ public class Message {
     private String text;
     private String category;
     @Column(name = "created_date")
-    private Date createddate;
+    private Date createdDate;
     @Column(name = "updated_date")
-    private Date updateddate;
+    private Date updatedDate;
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;

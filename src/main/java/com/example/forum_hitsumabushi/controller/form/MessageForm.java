@@ -14,6 +14,6 @@ public class MessageForm {
     private String text;
     private String category;
     private Integer userId;
-    private Date createddate;
-    private Date updateddate;
+    private Date createdDate;
+    private Date updatedDate;
 }

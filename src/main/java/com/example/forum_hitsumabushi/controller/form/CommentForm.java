@@ -13,6 +13,6 @@ public class CommentForm {
     private String text;
     private Integer userId;
     private Integer messageId;
-    private Date createddate;
-    private Date updateddate;
+    private Date createdDate;
+    private Date updatedDate;
 }

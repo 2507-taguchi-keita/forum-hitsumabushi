@@ -41,8 +41,8 @@ public class MessageService {
             userMessage.setTitle(result.getTitle());
             userMessage.setText(result.getText());
             userMessage.setCategory(result.getCategory());
-            userMessage.setCreateddate(result.getCreateddate());
-            userMessage.setUpdateddate(result.getUpdateddate());
+            userMessage.setCreatedDate(result.getCreatedDate());
+            userMessage.setUpdatedDate(result.getUpdatedDate());
             userComments.add(userMessage);
         }
         return userComments;

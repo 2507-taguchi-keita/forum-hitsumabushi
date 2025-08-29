@@ -32,8 +32,8 @@ public class CommentService {
             userComment.setUserId(result.getUserId());
             userComment.setMessageId(result.getMessageId());
             userComment.setText(result.getText());
-            userComment.setCreateddate(result.getCreateddate());
-            userComment.setUpdateddate(result.getUpdateddate());
+            userComment.setCreatedDate(result.getCreatedDate());
+            userComment.setUpdatedDate(result.getUpdatedDate());
             userComments.add(userComment);
         }
         return userComments;

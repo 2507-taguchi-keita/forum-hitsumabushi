@@ -33,7 +33,7 @@ public class UserService {
 
     //アカウントを検索
     public List<UserForm> findByAccount(String account){
-        List<User> results = userRepository.findByAccountOrderByUpdateddateDesc(account);
+        List<User> results = userRepository.findByAccountOrderByUpdatedDateDesc(account);
         return setUserForm(results);
     }
 
@@ -52,8 +52,8 @@ public class UserService {
             user.setBranchId(result.getBranchId());
             user.setDepartmentId(result.getDepartmentId());
             user.setIsStopped(result.getIsStopped());
-            user.setCreateddate(result.getCreatedDate());
-            user.setUpdateddate(result.getUpdatedDate());
+            user.setCreatedDate(result.getCreatedDate());
+            user.setUpdatedDate(result.getUpdatedDate());
             users.add(user);
         }
         return users;

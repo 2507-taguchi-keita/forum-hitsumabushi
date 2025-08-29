@@ -19,12 +19,12 @@ public interface CommentRepository extends JpaRepository<Comment, Integer> {
         user.id,
         comment.messageId,
         comment.text,
-        comment.createddate,
-        comment.updateddate
+        comment.createdDate,
+        comment.updatedDate
     )
     FROM Comment comment
     JOIN comment.user user
-    ORDER BY comment.updateddate DESC
+    ORDER BY comment.updatedDate DESC
 """)
     List<UserComment> findAllUserComments();
 }

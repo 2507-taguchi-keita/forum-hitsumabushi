@@ -15,6 +15,6 @@ public class UserCommentForm {
     private Integer userId;
     private Integer messageId;
     private String text;
-    private Date createddate;
-    private Date updateddate;
+    private Date createdDate;
+    private Date updatedDate;
 }
