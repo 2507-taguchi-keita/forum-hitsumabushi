@@ -36,7 +36,7 @@ public class LoginFilter implements Filter {
             return;
         }
         //ログインページにリダイレクト
-        httpResponse.sendRedirect("/login");
+        httpResponse.sendRedirect("/login?error=unauthorized");
     }
 
     @Override

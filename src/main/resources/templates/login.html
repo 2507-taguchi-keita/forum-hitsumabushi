@@ -9,15 +9,11 @@
 
     <body>
         <div class="page-login">
-            <div th:if="${param.error}">
-                <p style="color:red;">ログインしてください</p>
-            </div>
             <h1>ログイン</h1>
 
             <!-- ログインエラー表示 -->
-            <div th:if="${loginError != null}">
-                <p th:text="${loginError}" style="color: red;"></p>
-                <br>
+            <div th:if="${errorCode}">
+                <p th:text="${errorCode}" style="color:red;"></p>
             </div>
 
             <form action="/login" method="post" th:object="${userForm}">

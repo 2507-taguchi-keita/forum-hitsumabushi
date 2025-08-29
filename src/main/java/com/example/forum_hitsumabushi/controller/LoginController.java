@@ -10,7 +10,9 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,9 +24,14 @@ public class LoginController {
 
     // 初回アクセス時の処理：ログインページを表示
     @GetMapping("/login")
-    public ModelAndView setViewLogin(@ModelAttribute("userForm") UserForm userForm) {
+    public ModelAndView setViewLogin(@ModelAttribute("userForm") UserForm userForm, @RequestParam(value = "error", required = false) String error,
+                                     RedirectAttributes redirectAttributes) {
         ModelAndView mav = new ModelAndView();
 
+        if ("unauthorized".equals(error)) {
+            redirectAttributes.addFlashAttribute("errorCode", "ログインしてください");
+            return new ModelAndView("redirect:/login");
+        }
         mav.setViewName("/login");
         return mav;
     }
@@ -50,7 +57,6 @@ public class LoginController {
             mav.addObject("loginError", errorMessages);
             return mav;
         }
-
         session.setAttribute("loginUser", user);
         return new ModelAndView("redirect:/");
     }
