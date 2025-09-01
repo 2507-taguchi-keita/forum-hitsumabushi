@@ -5,6 +5,7 @@ import com.example.forum_hitsumabushi.validation.NotOnlyWhitespace;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Getter
@@ -26,6 +27,6 @@ public class MessageForm {
     private String category;
 
     private Integer userId;
-    private Date createdDate;
-    private Date updatedDate;
+    private LocalDate createdDate;
+    private LocalDate updatedDate;
 }

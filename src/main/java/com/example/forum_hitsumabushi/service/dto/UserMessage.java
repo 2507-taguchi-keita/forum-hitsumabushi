@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Getter
@@ -17,8 +19,8 @@ public class UserMessage {
     private String title;
     private String text;
     private String category;
-    private Date createdDate;
-    private Date updatedDate;
+    private LocalDateTime createdDate;
+    private LocalDateTime updatedDate;
     private Integer userId;
     private String account;
     private String name;

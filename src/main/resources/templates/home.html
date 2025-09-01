@@ -21,24 +21,20 @@
     </div>
     <br>
     <div class="filtered-posts">
-        <label>開始日 <input type="date" name="fromDate"></label>
-        <label>終了日 <input type="date" name="toDate"></label>
-        <label>カテゴリー <input type="text" name="category" placeholder="部分一致"></label>
-        <button type="submit">絞り込み</button>
-        <!--<form th:action="@{/home}" method="get" th:object="${filter}">--
-            <label>開始日 <input type="date" th:field="*{fromDate}"></label>
-            <label>終了日 <input type="date" th:field="*{toDate}"></label>
-            <label>カテゴリー <input type="text" th:field="*{category}" placeholder="部分一致"></label>
+        <form th:action="@{./}" method="get" th:object="${filterForm}">--
+            <label>開始日 <input type="date" name="startDate" th:field="*{startDate}"></label>
+            <label>終了日 <input type="date" name="endDate" th:field="*{endDate}"></label>
+            <label>カテゴリー <input type="text" name="category" th:field="*{category}" placeholder="部分一致"></label>
             <button type="submit">絞り込み</button>
-        </form>-->
+        </form>
     </div>
-    <div class="message" th:each="message : ${messages}">
+    <div class="message" th:each="message : ${messageList}">
         <hr />
         <h3 th:text="${message.title}">件名</h3>
         <div>本文：<pre th:text="${message.text}"></pre></div>
         <div>カテゴリー：<span th:text="${message.category}"></span></div>
         <div>投稿日時：
-            <span th:text="${message.createdDate != null ? #dates.format(message.createdDate, 'yyyy/MM/dd HH:mm') : ''}"></span>
+            <span th:text="${message.createdDate != null ? #temporals.format(message.createdDate, 'yyyy/MM/dd') : ''}"></span>
         </div>
         <div>投稿者：<span th:text="${message.account}"></span></div>
         <br>
@@ -55,7 +51,6 @@
         <textarea class="tweet-box" th:field="*{comment}" size="20" maxlength="200"></textarea><br/>
         <span th:if="${session.messageId != null and session.messageId == message.id}" th:errors="*{comment}" style="color: red"></span><br/>
         <input type="hidden" th:field="*{messageId}" th:value="${message.id}" />
-        <input type="submit" value="返信">
     </form>-->
     <div class="comment-form">
         <form th:action="@{/comment/0}" method="post">

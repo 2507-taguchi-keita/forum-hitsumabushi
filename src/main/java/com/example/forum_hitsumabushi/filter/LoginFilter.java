@@ -24,8 +24,9 @@ public class LoginFilter implements Filter {
         session = httpRequest.getSession(false);
         String path = httpRequest.getRequestURI();
 
-        // ログイン不要なページは通す
-        if (path.startsWith("/login") || path.startsWith("/css") || path.startsWith("/js")) {
+        // ログイン不要なページは通す(cssやjsをログイン必須にしてしまうと、真っ白な画面になる)
+        //path.startsWith=から始まるURl・・path.equals=URLが引数に完全一致しているか・・path.endsWith=で終わるURL
+        if (path.equals("/") || path.startsWith("/login") || path.startsWith("/css") || path.startsWith("/js")) {
             chain.doFilter(request, response);
             return;
         }

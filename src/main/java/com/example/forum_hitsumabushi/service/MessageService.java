@@ -1,5 +1,6 @@
 package com.example.forum_hitsumabushi.service;
 
+import com.example.forum_hitsumabushi.controller.form.FilterForm;
 import com.example.forum_hitsumabushi.controller.form.MessageForm;
 import com.example.forum_hitsumabushi.controller.form.UserMessageForm;
 import com.example.forum_hitsumabushi.repository.CommentRepository;
@@ -7,12 +8,17 @@ import com.example.forum_hitsumabushi.repository.MessageRepository;
 import com.example.forum_hitsumabushi.repository.UserRepository;
 import com.example.forum_hitsumabushi.repository.entity.Message;
 import com.example.forum_hitsumabushi.repository.entity.User;
+import com.example.forum_hitsumabushi.service.dto.FilterDto;
 import com.example.forum_hitsumabushi.service.dto.UserMessage;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,18 +29,21 @@ public class MessageService {
     UserRepository userRepository;
     @Autowired
     MessageRepository messageRepository;
-    @Autowired
-    CommentRepository commentRepository;
 
     //投稿全件取得処理
-    public List<UserMessageForm> findAllUserMessages(){
-        List<UserMessage> results = messageRepository.findAllUserMessages();
-        return setMessageForm(results);
+    public List<UserMessageForm> findAllUserMessages(FilterDto filterDto){
+        LocalDateTime start = filterDto.getStartDateTime();
+        LocalDateTime end = filterDto.getEndDateTime();
+        String category = filterDto.getCategory();
+        Pageable pageable = PageRequest.of(0, 1000);
+        List<UserMessage> results = messageRepository.findAllUserMessages(start, end, category, pageable);
+        List<UserMessageForm> userMessageList = setMessageForm(results);
+        return userMessageList;
     }
 
     //投稿全件取得処理(EntityからFormへ詰め替え)
     private List<UserMessageForm> setMessageForm(List<UserMessage> results){
-        List<UserMessageForm> userComments = new ArrayList<>();
+        List<UserMessageForm> userMessages = new ArrayList<>();
         for (UserMessage result : results) {
             UserMessageForm userMessage = new UserMessageForm();
 
@@ -47,11 +56,11 @@ public class MessageService {
             userMessage.setTitle(result.getTitle());
             userMessage.setText(result.getText());
             userMessage.setCategory(result.getCategory());
-            userMessage.setCreatedDate(result.getCreatedDate());
-            userMessage.setUpdatedDate(result.getUpdatedDate());
-            userComments.add(userMessage);
+            userMessage.setCreatedDate(result.getCreatedDate().toLocalDate());
+            userMessage.setUpdatedDate(result.getUpdatedDate().toLocalDate());
+            userMessages.add(userMessage);
         }
-        return userComments;
+        return userMessages;
     }
 
     // 投稿を追加する処理
@@ -79,8 +88,10 @@ public class MessageService {
         message.setTitle(reqMessage.getTitle());
         message.setText(reqMessage.getText());
         message.setCategory(reqMessage.getCategory());
-        message.setCreatedDate(reqMessage.getCreatedDate());
-        message.setUpdatedDate(reqMessage.getUpdatedDate());
+        if (message.getCreatedDate() == null) {
+            message.setCreatedDate(LocalDateTime.now());
+        }
+        message.setUpdatedDate(LocalDateTime.now());
         return message;
     }
 
@@ -89,4 +100,5 @@ public class MessageService {
         //commentRepository.deleteByContentId(id);
         messageRepository.deleteById(id);
     }
+
 }

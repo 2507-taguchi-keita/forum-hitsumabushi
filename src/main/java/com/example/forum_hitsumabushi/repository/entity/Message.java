@@ -6,6 +6,8 @@ import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
@@ -33,11 +35,11 @@ public class Message {
 
     @Column(name = "created_date")
     @CreationTimestamp
-    private Date createdDate;
+    private LocalDateTime createdDate;
 
     @Column(name = "updated_date")
     @UpdateTimestamp
-    private Date updatedDate;
+    private LocalDateTime updatedDate;
 
     @ManyToOne
     @JoinColumn(name = "user_id")

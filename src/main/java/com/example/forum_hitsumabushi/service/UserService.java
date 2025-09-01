@@ -52,8 +52,8 @@ public class UserService {
             user.setBranchId(result.getBranchId());
             user.setDepartmentId(result.getDepartmentId());
             user.setIsStopped(result.getIsStopped());
-            user.setCreatedDate(result.getCreatedDate());
-            user.setUpdatedDate(result.getUpdatedDate());
+            user.setCreatedDate(result.getCreatedDate().toLocalDate());
+            user.setUpdatedDate(result.getUpdatedDate().toLocalDate());
             users.add(user);
         }
         return users;

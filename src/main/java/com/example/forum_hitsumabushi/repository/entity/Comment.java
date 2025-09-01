@@ -4,7 +4,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "comments")
@@ -17,9 +18,9 @@ public class Comment {
     private String text;
     private Integer messageId;
     @Column(name = "created_date")
-    private Date createdDate;
+    private LocalDateTime createdDate;
     @Column(name = "updated_date")
-    private Date updatedDate;
+    private LocalDateTime updatedDate;
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
