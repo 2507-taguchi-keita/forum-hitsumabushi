@@ -82,23 +82,61 @@ body {
 }
 
 /*コメントテキストボックス*/
-.main-contents .comment-form form textarea {
+.main-contents .comment-form form .textarea {
     width: 500px;
 }
 
-/*返信ボタンと削除ボタン*/
-.button-row {
-    display: flex;   /* 横並び */
-    gap: 10px;       /* ボタン間のスペース */
-    margin-top: 5px;
+/*投稿削除ボタン*/
+.message .message-delete form input[type="submit"] {
+    background-color: #fff;
+    border: solid 2px #2f4f4f;
+    color: #2f4f4f;
+    padding: 5px 15px;
+    text-decoration: none;
+    font-size: 15px;
+    cursor: pointer;
+    border-radius: 8px;
 }
 
-.reply-btn,
-.button-delete {
-    padding: 6px 15px;
-    border-radius: 5px;
-    cursor: pointer;
+.message .message-delete form input[type="submit"]:hover {
+    color: #2f4f4f;
+    background-color: #b0e0e6;
 }
+
+/*返信ボタン*/
+.comment-form form input[type="submit"] {
+    background-color: #fff;
+    border: solid 2px #2f4f4f;
+    color: #2f4f4f;
+    padding: 5px 15px;
+    text-decoration: none;
+    font-size: 15px;
+    cursor: pointer;
+    border-radius: 8px;
+}
+
+.comment-form form input[type="submit"]:hover {
+    color: #2f4f4f;
+    background-color: #b0e0e6;
+}
+
+/*コメント削除ボタン*/
+.replies .replies-delete form button[type="submit"] {
+    background-color: #fff;
+    border: solid 2px #2f4f4f;
+    color: #2f4f4f;
+    padding: 5px 15px;
+    text-decoration: none;
+    font-size: 15px;
+    cursor: pointer;
+    border-radius: 8px;
+}
+
+.replies .replies-delete .comment-delete form button[type="submit"]:hover{
+    color: #2f4f4f;
+    background-color: #b0e0e6;
+}
+
 
 /* ---------------
 ログイン画面

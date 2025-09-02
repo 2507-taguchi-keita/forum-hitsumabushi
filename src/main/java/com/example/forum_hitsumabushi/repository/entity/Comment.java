@@ -14,13 +14,20 @@ import java.time.LocalDateTime;
 public class Comment {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String text;
+
+//    private Integer userId;
+
     private Integer messageId;
+
     @Column(name = "created_date")
     private LocalDateTime createdDate;
+
     @Column(name = "updated_date")
     private LocalDateTime updatedDate;
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;

@@ -10,6 +10,7 @@ import java.util.Date;
 @Setter
 public class UserCommentForm {
 
+    private Integer id;
     private String account;
     private String name;
     private Integer branchId;

@@ -2,13 +2,16 @@ package com.example.forum_hitsumabushi.service;
 
 import com.example.forum_hitsumabushi.controller.form.FilterForm;
 import com.example.forum_hitsumabushi.controller.form.MessageForm;
+import com.example.forum_hitsumabushi.controller.form.UserCommentForm;
 import com.example.forum_hitsumabushi.controller.form.UserMessageForm;
 import com.example.forum_hitsumabushi.repository.CommentRepository;
 import com.example.forum_hitsumabushi.repository.MessageRepository;
 import com.example.forum_hitsumabushi.repository.UserRepository;
+import com.example.forum_hitsumabushi.repository.entity.Comment;
 import com.example.forum_hitsumabushi.repository.entity.Message;
 import com.example.forum_hitsumabushi.repository.entity.User;
 import com.example.forum_hitsumabushi.service.dto.FilterDto;
+import com.example.forum_hitsumabushi.service.dto.UserComment;
 import com.example.forum_hitsumabushi.service.dto.UserMessage;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +32,8 @@ public class MessageService {
     UserRepository userRepository;
     @Autowired
     MessageRepository messageRepository;
+    @Autowired
+    CommentRepository commentRepository;
 
     //投稿全件取得処理
     public List<UserMessageForm> findAllUserMessages(FilterDto filterDto){
@@ -101,4 +106,7 @@ public class MessageService {
         messageRepository.deleteById(id);
     }
 
+    public Message findMessageById(Integer id) {
+        return messageRepository.findById(id).orElse(null);
+    }
 }

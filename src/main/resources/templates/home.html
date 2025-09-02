@@ -8,7 +8,7 @@
 <body>
 <div class="header-contents">
     <div class="header" th:if="${loginUser != null}">
-        <form th:action="@{/logout}" method="post" onsubmit="return confirmLogout();">
+        <form th:action="@{/logout}" method="post">
             <input class="button-logout" type="submit" value="ログアウト">
         </form>
         <a th:if="${isSoumuJinji}" th:href="@{/admin/users}" class="user-manage-btn">ユーザ管理</a>
@@ -38,38 +38,46 @@
         </div>
         <div>投稿者：<span th:text="${message.account}"></span></div>
         <br>
-        <div th:if="${loginUser.id == message.userId}">
+        <div th:if="${loginUser.id == message.userId}" class="message-delete">
             <form th:action="@{/delete/{id}(id=${message.id})}" th:method="post" onsubmit="return confirmDelete();">
                 <input type="hidden" name="_method" value="delete"/>
                 <input class="button-delete" type="submit" value="削除">
             </form>
         </div>
-    </div>
-    <h4>コメント</h4>
-    <!-- 返信フォーム
-    <form th:action="@{/comment/{messageId}(messageId=${message.id})}" method="post" th:object="${commentForm}">
-        <textarea class="tweet-box" th:field="*{comment}" size="20" maxlength="200"></textarea><br/>
-        <span th:if="${session.messageId != null and session.messageId == message.id}" th:errors="*{comment}" style="color: red"></span><br/>
-        <input type="hidden" th:field="*{messageId}" th:value="${message.id}" />
-    </form>-->
-    <div class="comment-form">
-        <form th:action="@{/comment/0}" method="post">
-            <textarea class="tweet-box" name="comment" size="20" maxlength="200"></textarea><br/>
-            <input type="hidden" name="messageId" value="0" />
-            <div class="comment-buttons">
-                <input type="submit" value="返信" class="reply-btn">
-                <button type="submit" formaction="/delete/0" formmethod="post" class="button-delete"
-                        onclick="return confirmDelete();">削除</button>
+        <br>
+        <h4>コメント</h4>
+        <div class="replies">
+            <div class="replies-delete" th:each="comment : ${comments}" th:if="${comment.messageId} == ${message.id}">
+                <hr/>
+                <div class="comment-text">
+                    返信 : <span th:text="${comment.text}"></span>
+                </div>
+                <div class="comment-date" style="font-size: small; color: gray;">
+                    <span th:text="${comment.createdDate != null} ? ${#temporals.format(comment.createdDate, 'yyyy/MM/dd')} : ''"></span>
+                </div>
+                <br>
+                <div th:if="${loginUser.id == comment.userId}" class="comment-delete">
+                    <form th:action="@{/comment/delete/{id}(id=${comment.id})}" method="post" onsubmit="return confirmDelete();">
+                        <input type="hidden" name="_method" value="delete"/>
+                        <button type="submit" class="button-delete">削除</button>
+                    </form>
+                </div>
             </div>
-        </form>
+        </div>
+        <br>
+        <div class="comment-form">
+            <form th:action="@{/comment/{messageId}(messageId=${message.id})}" th:object="${commentForm}" method="post">
+                <textarea th:field="*{text}"></textarea><br/>
+                <span th:if="${session.messageId != null and session.messageId == message.id}" th:errors="*{text}" style="color:red"></span><br/>
+                <input type="hidden" th:field="*{messageId}" th:value="${message.id}" />
+                <input type="submit" value="返信"/>
+            </form>
+        </div>
     </div>
 </div>
 <script>
     function confirmDelete() {
         return confirm("本当に削除しますか？");
-    }
-    function confirmLogout() {
-        return confirm("ログアウトしますか？");
     }
 </script>
 </body>

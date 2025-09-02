@@ -33,11 +33,8 @@ public class HomeController {
 
 
     @GetMapping("/")
-    //public ModelAndView home(Principal principal){
     public ModelAndView home(@ModelAttribute("filterForm") FilterForm filterForm, Model model, HttpSession session) {
-        //String account = principal.getName();
         ModelAndView mav = new ModelAndView();
-
         // フォームから受け取った値
         LocalDate startDate = filterForm.getStartDate();
         LocalDate endDate = filterForm.getEndDate();
@@ -70,7 +67,10 @@ public class HomeController {
         }
 
         mav.addObject("messageList", userMessageList);
-        mav.addObject("comments", commentService.findAllComment());
+        mav.addObject("comments", commentService.findAllUserComment());
+        if(!model.containsAttribute("commentForm")){
+            mav.addObject("commentForm", new CommentForm());
+        }
 
         UserForm loginUser = (UserForm) session.getAttribute("loginUser");
         model.addAttribute("loginUser", loginUser);
