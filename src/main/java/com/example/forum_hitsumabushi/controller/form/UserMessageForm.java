@@ -3,7 +3,7 @@ package com.example.forum_hitsumabushi.controller.form;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -18,6 +18,6 @@ public class UserMessageForm {
     private String title;
     private String text;
     private String category;
-    private Date createdDate;
-    private Date updatedDate;
+    private LocalDate createdDate;
+    private LocalDate updatedDate;
 }

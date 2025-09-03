@@ -68,10 +68,10 @@
                             </td>
 
                             <!-- 登録日時 -->
-                            <td class="user-createdDate" th:text="${#dates.format(user.createdDate, 'yyyy/MM/dd HH:mm:ss')}"></td>
+                            <td class="user-createdDate" th:text="${#temporals.format(user.createdDate, 'yyyy/MM/dd HH:mm:ss')}"></td>
 
                             <!-- 更新日時 -->
-                            <td class="user-updatedDate" th:text="${#dates.format(user.updatedDate, 'yyyy/MM/dd HH:mm:ss')}"></td>
+                            <td class="user-updatedDate" th:text="${#temporals.format(user.updatedDate, 'yyyy/MM/dd HH:mm:ss')}"></td>
 
                             <!-- 編集ボタン -->
                             <td class="user-edit">

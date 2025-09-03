@@ -8,7 +8,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -36,8 +36,8 @@ public class UserForm {
     private Integer departmentId;
 
     private Integer isStopped;
-    private Date createdDate;
-    private Date updatedDate;
+    private LocalDate createdDate;
+    private LocalDate updatedDate;
 
     // branches
     private String branchName;

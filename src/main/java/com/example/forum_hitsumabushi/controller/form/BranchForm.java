@@ -3,7 +3,7 @@ package com.example.forum_hitsumabushi.controller.form;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -11,6 +11,6 @@ public class BranchForm {
 
     private Integer id;
     private String name;
-    private Date createdDate;
-    private Date updatedDate;
+    private LocalDate createdDate;
+    private LocalDate updatedDate;
 }

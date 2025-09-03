@@ -3,18 +3,19 @@ package com.example.forum_hitsumabushi.controller.form;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Getter
 @Setter
 public class UserCommentForm {
 
+    private Integer id;
     private String account;
     private String name;
     private Integer branchId;
     private Integer userId;
     private Integer messageId;
     private String text;
-    private Date createdDate;
-    private Date updatedDate;
+    private LocalDate createdDate;
+    private LocalDate updatedDate;
 }

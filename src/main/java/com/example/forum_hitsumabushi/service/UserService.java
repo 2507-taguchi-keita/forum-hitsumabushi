@@ -2,7 +2,6 @@ package com.example.forum_hitsumabushi.service;
 
 import com.example.forum_hitsumabushi.controller.form.BranchForm;
 import com.example.forum_hitsumabushi.controller.form.DepartmentForm;
-import com.example.forum_hitsumabushi.controller.form.UserBranchDepartmentForm;
 import com.example.forum_hitsumabushi.controller.form.UserForm;
 import com.example.forum_hitsumabushi.repository.BranchDepartmentRepository;
 import com.example.forum_hitsumabushi.repository.BranchRepository;
@@ -16,6 +15,7 @@ import com.example.forum_hitsumabushi.utils.CipherUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -130,8 +130,8 @@ public class UserService {
             user.setBranchId(result.getBranchId());
             user.setDepartmentId(result.getDepartmentId());
             user.setIsStopped(result.getIsStopped());
-            user.setCreatedDate(result.getCreatedDate());
-            user.setUpdatedDate(result.getUpdatedDate());
+            user.setCreatedDate(result.getCreatedDate().toLocalDate());
+            user.setUpdatedDate(result.getUpdatedDate().toLocalDate());
             user.setBranchName(result.getBranchName());
             user.setDepartmentName(result.getDepartmentName());
             users.add(user);
@@ -147,8 +147,8 @@ public class UserService {
         user.setAccount(reqUser.getAccount());
         user.setName(reqUser.getName());
         user.setIsStopped(reqUser.getIsStopped());
-        user.setCreatedDate(reqUser.getCreatedDate());
-        user.setUpdatedDate(reqUser.getUpdatedDate());
+        user.setCreatedDate(LocalDateTime.now());
+        user.setUpdatedDate(LocalDateTime.now());
 
         // ユーザー編集時は「パスワードが空白＝更新しない」となるので、条件分岐でセットする値を使い分け
         if (reqUser.getPassword().isEmpty()) {
@@ -198,8 +198,8 @@ public class UserService {
             user.setBranchId(result.getBranch().getId());
             user.setDepartmentId(result.getDepartment().getId());
             user.setIsStopped(result.getIsStopped());
-            user.setCreatedDate(result.getCreatedDate());
-            user.setUpdatedDate(result.getUpdatedDate());
+            user.setCreatedDate(result.getCreatedDate().toLocalDate());
+            user.setUpdatedDate(result.getUpdatedDate().toLocalDate());
             users.add(user);
         }
         return users;
@@ -215,8 +215,8 @@ public class UserService {
 
             branch.setId(result.getId());
             branch.setName(result.getName());
-            branch.setCreatedDate(result.getCreatedDate());
-            branch.setUpdatedDate(result.getUpdatedDate());
+            branch.setCreatedDate(result.getCreatedDate().toLocalDate());
+            branch.setUpdatedDate(result.getUpdatedDate().toLocalDate());
             branches.add(branch);
         }
         return branches;
@@ -232,8 +232,8 @@ public class UserService {
 
             department.setId(result.getId());
             department.setName(result.getName());
-            department.setCreatedDate(result.getCreatedDate());
-            department.setUpdatedDate(result.getUpdatedDate());
+            department.setCreatedDate(result.getCreatedDate().toLocalDate());
+            department.setUpdatedDate(result.getUpdatedDate().toLocalDate());
             departments.add(department);
         }
         return departments;
