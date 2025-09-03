@@ -84,6 +84,7 @@ public class MessageService {
         return message;
     }
 
+    // 投稿を削除する処理
     @Transactional
     public void deleteMessage(Integer id) {
         //commentRepository.deleteByContentId(id);

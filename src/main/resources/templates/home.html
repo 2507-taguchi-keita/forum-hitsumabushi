@@ -11,7 +11,8 @@
         <form th:action="@{/logout}" method="post" onsubmit="return confirmLogout();">
             <input class="button-logout" type="submit" value="ログアウト">
         </form>
-        <a th:if="${isSoumuJinji}" th:href="@{/admin/users}" class="user-manage-btn">ユーザ管理</a>
+
+        <a class="btn-userManage" th:href="@{/admin}">ユーザ管理</a>
     </div>
 </div>
 <div class="main-contens">
@@ -43,8 +44,8 @@
         <div>投稿者：<span th:text="${message.account}"></span></div>
         <br>
         <div th:if="${loginUser.id == message.userId}">
-            <form th:action="@{/delete/{id}(id=${message.id})}" th:method="post" onsubmit="return confirmDelete();">
-                <input type="hidden" name="_method" value="delete"/>
+            <form th:action="@{/delete/{id}(id=${message.id})}" th:method="delete" onsubmit="return confirmDelete();">
+<!--                <input type="hidden" name="_method" value="delete"/>-->
                 <input class="button-delete" type="submit" value="削除">
             </form>
         </div>

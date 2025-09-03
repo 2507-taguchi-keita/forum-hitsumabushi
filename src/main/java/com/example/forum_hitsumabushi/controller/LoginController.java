@@ -2,6 +2,8 @@ package com.example.forum_hitsumabushi.controller;
 
 import com.example.forum_hitsumabushi.controller.form.UserForm;
 import com.example.forum_hitsumabushi.service.UserService;
+import com.example.forum_hitsumabushi.validation.AccountNotWhitespace;
+import com.example.forum_hitsumabushi.validation.PasswordNotWhitespace;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,7 +33,10 @@ public class LoginController {
 
     // ログイン処理
     @PostMapping("/login")
-    public ModelAndView login(@ModelAttribute("userForm") @Validated UserForm userForm, BindingResult bindingResult, HttpSession session) {
+    public ModelAndView login(
+            @ModelAttribute("userForm") @Validated({AccountNotWhitespace.class, PasswordNotWhitespace.class}) UserForm userForm,
+            BindingResult bindingResult,
+            HttpSession session) {
 
         // ログイン情報に関するバリデーション
         if (bindingResult.hasErrors()) {

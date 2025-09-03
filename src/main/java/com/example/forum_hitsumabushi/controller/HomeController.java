@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
+
 @Controller
 public class HomeController {
     @Autowired
@@ -60,6 +62,18 @@ public class HomeController {
         }
 
         mav.setViewName("/new");
+        return mav;
+    }
+
+    // ユーザー管理画面の表示
+    @GetMapping("/admin")
+    public ModelAndView adminUser() {
+        ModelAndView mav = new ModelAndView();
+
+        List<UserForm> allUser = userService.findAllUser();
+
+        mav.addObject("users", allUser);
+        mav.setViewName("/user");
         return mav;
     }
 

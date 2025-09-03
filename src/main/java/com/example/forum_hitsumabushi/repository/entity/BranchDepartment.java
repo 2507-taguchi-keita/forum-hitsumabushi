@@ -1,47 +1,32 @@
 package com.example.forum_hitsumabushi.repository.entity;
 
 import jakarta.persistence.*;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import java.time.LocalDateTime;
 import java.util.Date;
 
-
 @Entity
-@Table(name = "users")
+@Table(name = "branchdepartment")
 @Getter
 @Setter
-public class User {
+public class BranchDepartment {
+
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column
-    private String account;
+    private Integer branchId;
 
     @Column
-    private String password;
+    private Integer departmentId;
 
     @Column
-    private String name;
-
-    @ManyToOne
-    @JoinColumn(name = "branch_id")
-    private Branch branch;
-
-    @ManyToOne
-    @JoinColumn(name = "department_id")
-    private Department department;
-
-    @Column
-    private Integer isStopped;
+    private boolean isAll;
 
     @CreationTimestamp
     @Column(updatable = false, name = "created_date")

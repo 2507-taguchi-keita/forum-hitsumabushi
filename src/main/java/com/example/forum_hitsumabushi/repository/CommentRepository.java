@@ -15,7 +15,7 @@ public interface CommentRepository extends JpaRepository<Comment, Integer> {
         comment.id,
         user.account,
         user.name,
-        user.branchId,
+        user.branch.id,
         user.id,
         comment.messageId,
         comment.text,

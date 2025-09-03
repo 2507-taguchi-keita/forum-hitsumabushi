@@ -20,7 +20,7 @@
                 <br>
             </div>
 
-            <form action="/login" method="post" th:object="${userForm}">
+            <form th:action="@{/login}" method="post" th:object="${userForm}">
                 <!-- アカウント名 -->
                 <div class="input-account">
                     <input class="input-area" type="text" placeholder="アカウント名" th:field="*{account}">
@@ -36,7 +36,7 @@
                     <input id="password" class="input-area" type="password" placeholder="パスワード" th:field="*{password}">
 
                     <div class="radio-pwVisible">
-                        <input id="pwVisible" type="checkbox" onclick="passwordVisibility()" >
+                        <input id="pwVisible" class="pwVisible" type="checkbox" onclick="passwordVisibility()" >
                         <label>パスワード表示</label>
                     </div>
 

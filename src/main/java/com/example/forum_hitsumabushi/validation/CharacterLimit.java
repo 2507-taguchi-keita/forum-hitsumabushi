@@ -8,13 +8,21 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-// 改行含めた文字数をチェックするバリデーション
+// 文字制限をチェックするバリデーション
 @Target({ ElementType.FIELD })
 @Constraint(validatedBy = CharacterLimitValid.class)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface CharacterLimit {
-    String message() default "指定の文字数以内で入力してください";
-    int limit() default 100;
+    // デフォルトメッセージ
+    String message() default "指定の条件で入力してください";
+
+    // 文字数の判定
+    int min() default 0;
+    int max() default 100;
+
+    // 入力文字の判定
+    String regexp() default "";
+
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }

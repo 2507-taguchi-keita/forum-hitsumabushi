@@ -101,7 +101,7 @@ body {
 }
 
 /* ---------------
-ログイン画面
+　ログイン画面
 --------------- */
 .page-login {
     width: 500px;
@@ -130,6 +130,10 @@ body {
     margin-bottom: 20px;
 }
 
+.page-login .input-password .pwVisible:hover {
+    cursor: pointer;
+}
+
 .page-login .btn-login {
     width: 100px;
     height: 35px;
@@ -144,7 +148,7 @@ body {
 }
 
 /* ---------------
-新規投稿画面
+　新規投稿画面
 --------------- */
 .page-new {
     width: 500px;
@@ -152,6 +156,11 @@ body {
     padding: 30px;
     background-color: #fff;
     box-shadow: 0px 2px 4px 2px #DDD;
+}
+
+.page-new .btn:hover {
+    cursor: pointer;
+    opacity: 0.7;
 }
 
 .page-new h1 {
@@ -162,26 +171,15 @@ body {
     margin-bottom: 30px;
 }
 
+.page-new .main-contents .form-area {
+    margin-bottom: 20px;
+}
+
 .page-new .main-contents .input-area {
     width: 400px;
     padding: 7px 10px;
     border: solid 1px #000;
     border-radius: 5px;
-}
-
-/* --- タイトル --- */
-.page-new .main-contents .form-title {
-    margin-bottom: 20px;
-}
-
-/* --- カテゴリー --- */
-.page-new .main-contents .form-category {
-    margin-bottom: 20px;
-}
-
-/* --- 投稿内容 --- */
-.page-new .main-contents .form-content {
-    margin-bottom: 20px;
 }
 
 /* --- 追加ボタン --- */
@@ -193,11 +191,6 @@ body {
     border-radius: 5px;
 }
 
-.page-new .main-contents .btn-add:hover {
-    cursor: pointer;
-    opacity: 0.7;
-}
-
 /* --- 戻るボタン --- */
 .page-new .btn-return button {
     width: 70px;
@@ -206,7 +199,174 @@ body {
     border-radius: 5px;
 }
 
-.page-new .btn-return button:hover {
+/* ---------------
+　ユーザー管理画面
+--------------- */
+.page-user {
+    padding: 30px;
+    background-color: #fff;
+}
+
+.page-user .btn:hover {
     cursor: pointer;
     opacity: 0.7;
+}
+
+.page-user h1 {
+    margin-bottom: 30px;
+}
+
+.page-user .main-contents .btn:hover {
+    cursor: pointer;
+    opacity: 0.7;
+}
+
+.page-user .main-contents .user-add {
+    margin-bottom: 20px;
+}
+
+.page-user .main-contents .user-add .btn-userAdd {
+    display: block;
+    width: 110px;
+    padding: 5px;
+    text-align: center;
+    text-decoration: none;
+    color: #fff;
+    background-color: #1E88E5;
+    border-radius: 5px;
+}
+
+.page-user .main-contents .btn-return {
+    margin-bottom: 30px;
+}
+
+.page-user .main-contents .user-list {
+    border-collapse: collapse;
+}
+
+.page-user .main-contents .user-list thead tr th {
+    padding: 5px 10px;
+    border: solid 1px #333;
+    background-color: #f8f8f8;
+}
+
+.page-user .main-contents .user-list tbody tr td {
+    padding: 5px 10px;
+    border: solid 1px #333;
+}
+
+.page-user .main-contents .user-list tbody tr .user-status form select {
+    margin-right: 10px;
+}
+
+/* ---------------
+　ユーザー登録画面
+--------------- */
+.page-userAdd {
+    width: 600px;
+    margin: 70px auto 0;
+    padding: 30px;
+    background-color: #fff;
+    box-shadow: 0px 2px 4px 2px #DDD;
+}
+
+.page-userAdd .btn:hover {
+    cursor: pointer;
+    opacity: 0.7;
+}
+
+.page-userAdd h1 {
+    margin-bottom: 30px;
+}
+
+.page-userAdd .main-contents {
+    margin-bottom: 30px;
+}
+
+.page-userAdd .main-contents .form-area {
+    margin-bottom: 20px;
+}
+
+.page-userAdd .main-contents .input-area {
+    width: 300px;
+    padding: 7px 10px;
+    border: solid 1px #000;
+    border-radius: 5px;
+}
+
+.page-userAdd .main-contents .form-password-chkOnly .pwVisible:hover {
+    cursor: pointer;
+}
+
+/* --- 追加ボタン --- */
+.page-userAdd .main-contents .btn-add {
+    width: 70px;
+    padding: 5px;
+    color: #fff;
+    background-color: #1E88E5;
+    border-radius: 5px;
+}
+
+/* --- 戻るボタン --- */
+.page-userAdd .btn-return button {
+    width: 70px;
+    padding: 5px;
+    background-color: #e0e0e0;
+    border-radius: 5px;
+}
+
+/* ---------------
+　ユーザー編集画面
+--------------- */
+.page-userEdit {
+    width: 600px;
+    margin: 70px auto 0;
+    padding: 30px;
+    background-color: #fff;
+    box-shadow: 0px 2px 4px 2px #DDD;
+}
+
+.page-userEdit .btn:hover {
+    cursor: pointer;
+    opacity: 0.7;
+}
+
+.page-userEdit h1 {
+    margin-bottom: 30px;
+}
+
+.page-userEdit .main-contents {
+    margin-bottom: 30px;
+}
+
+.page-userEdit .main-contents .form-area {
+    margin-bottom: 20px;
+}
+
+.page-userEdit .main-contents .input-area {
+    width: 300px;
+    padding: 7px 10px;
+    border: solid 1px #000;
+    border-radius: 5px;
+}
+
+.page-userEdit .main-contents .form-password-chkOnly .pwVisible:hover {
+    cursor: pointer;
+}
+
+/* --- 更新ボタン --- */
+.page-userEdit .main-contents .btn-update {
+    width: 70px;
+    padding: 5px;
+    color: #fff;
+    background-color: #1E88E5;
+    border-radius: 5px;
+}
+
+/* --- 戻るボタン --- */
+.page-userEdit .btn-return button {
+    width: 70px;
+    padding: 5px;
+    background-color: #e0e0e0;
+    border-radius: 5px;
 }
