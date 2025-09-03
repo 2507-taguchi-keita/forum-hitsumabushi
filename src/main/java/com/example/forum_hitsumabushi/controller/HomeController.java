@@ -11,11 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -32,13 +30,25 @@ public class HomeController {
 
 
     @GetMapping("/")
-    public ModelAndView home(@ModelAttribute("filterForm") FilterForm filterForm, Model model, HttpSession session) {
+    public ModelAndView home(
+            @ModelAttribute("filterForm") FilterForm filterForm,
+            Model model,
+            HttpSession session,
+            @RequestParam(value = "error", required = false) String error,
+            RedirectAttributes redirectAttributes) {
+
         ModelAndView mav = new ModelAndView();
 
         // 初回アクセス時の処理
         UserForm user = (UserForm) session.getAttribute("loginUser");
         if (user == null) {
             return new ModelAndView("forward:/login");
+        }
+
+        // 管理者権限フィルターでエラーが返ってきたらエラーメッセージを詰めてリダイレクト
+        if ("invalidAccess".equals(error)) {
+            redirectAttributes.addFlashAttribute("errorCode", "無効なアクセスです");
+            return new ModelAndView("redirect:/");
         }
 
         // フォームから受け取った値
