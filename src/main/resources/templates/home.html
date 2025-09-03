@@ -11,7 +11,8 @@
         <form th:action="@{/logout}" method="post">
             <input class="button-logout" type="submit" value="ログアウト">
         </form>
-        <a th:if="${isSoumuJinji}" th:href="@{/admin/users}" class="user-manage-btn">ユーザ管理</a>
+
+        <a class="btn-userManage" th:href="@{/admin}">ユーザ管理</a>
     </div>
 </div>
 <div class="main-contens">
@@ -31,7 +32,7 @@
     <div class="message" th:each="message : ${messageList}">
         <hr />
         <h3 th:text="${message.title}">件名</h3>
-        <div>本文：<pre th:text="${message.text}"></pre></div>
+        <div>本文：<span th:text="${message.text}"></span></div>
         <div>カテゴリー：<span th:text="${message.category}"></span></div>
         <div>投稿日時：
             <span th:text="${message.createdDate != null ? #temporals.format(message.createdDate, 'yyyy/MM/dd') : ''}"></span>
