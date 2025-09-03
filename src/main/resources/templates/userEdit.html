@@ -15,7 +15,7 @@
                 <form th:method="put" th:action="@{/updateUser/{id}(id=${id})}" th:object="${userForm}">
                     <!-- アカウント -->
                     <div class="form-area">
-                        <label>アカウント名</label>
+                        <label>【アカウント名】</label>
                         <br>
                         <textarea class="input-area" rows="1" th:field="*{account}"></textarea>
 
@@ -32,7 +32,7 @@
 
                     <!-- パスワード -->
                     <div class="form-area">
-                        <label>パスワード<br><span class="note">*変更しない場合は空白のまま送信</span></label>
+                        <label>【パスワード】<br><span class="note">*変更しない場合は空白のまま送信</span></label>
                         <br>
                         <input id="password" class="input-area" type="password" th:field="*{password}" th:value="*{password}">
 
@@ -49,7 +49,7 @@
 
                     <!-- パスワード確認用 -->
                     <div class="form-area form-password-chkOnly">
-                        <label>パスワード(確認用)</label>
+                        <label>【パスワード(確認用)】</label>
                         <br>
                         <input id="password-chk" class="input-area" type="password" name="passwordChk">
 
@@ -67,7 +67,7 @@
 
                     <!-- 氏名 -->
                     <div class="form-area">
-                        <label>氏名</label>
+                        <label>【氏名】</label>
                         <br>
                         <textarea class="input-area" rows="1" th:field="*{name}"></textarea>
 
@@ -80,7 +80,7 @@
 
                     <!-- 支社 -->
                     <div class="form-area">
-                        <label>支社</label>
+                        <label>【支社】</label>
                         <br>
                         <select class="input-area" name="branch" th:field="*{branchId}">
                             <option value="" selected></option>
@@ -99,7 +99,7 @@
 
                     <!-- 部署 -->
                     <div class="form-area">
-                        <label>部署</label>
+                        <label>【部署】</label>
                         <br>
                         <select class="input-area" name="department" th:field="*{departmentId}">
                             <option value="" selected></option>

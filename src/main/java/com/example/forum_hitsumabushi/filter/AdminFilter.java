@@ -16,8 +16,6 @@ public class AdminFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException{
 
-        System.out.println("管理者権限フィルター");
-
         // 型変換
         HttpServletRequest httpRequest = (HttpServletRequest) request;
         HttpServletResponse httpResponse = (HttpServletResponse) response;
@@ -27,19 +25,15 @@ public class AdminFilter implements Filter {
 
         // セッションデータの有無を判定（true → セッションから"loginUser"属性を取得）
         if (session != null) {
-            System.out.println("セッションチェック");
             Object loginUser = session.getAttribute("loginUser");
 
             // loginUser属性の有無を判定（true → 部署idを取得）
             if (loginUser != null) {
-                System.out.println("loginUser属性チェック");
                 UserForm userForm = (UserForm) loginUser;
                 Integer departmentId = userForm.getDepartmentId();
-                System.out.println(departmentId);
 
                 // 総務人事（id＝1）以外でログインしていないかを判定（true → エラーメッセージを設定しホーム画面へリダイレクト）
                 if (departmentId != 1) {
-                    System.out.println("総務人事チェック");
                     httpResponse.sendRedirect("/?error=invalidAccess");
                     return;
                 }

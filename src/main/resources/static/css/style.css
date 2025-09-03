@@ -93,7 +93,7 @@ body {
     text-align: center;
     text-decoration: none;
     color: #fff;
-    background-color: #1E88E5;
+    background-color: #3cb371;
     border: solid 1px #333;
     border-radius: 5px;
 }
@@ -209,7 +209,7 @@ body {
     width: 100px;
     height: 35px;
     color: #fff;
-    background-color: #1E88E5;
+    background-color: #3cb371;
     border-radius: 5px;
 }
 
@@ -258,7 +258,7 @@ body {
     width: 70px;
     padding: 5px;
     color: #fff;
-    background-color: #1E88E5;
+    background-color: #3cb371;
     border-radius: 5px;
 }
 
@@ -303,7 +303,7 @@ body {
     text-align: center;
     text-decoration: none;
     color: #fff;
-    background-color: #1E88E5;
+    background-color: #3cb371;
     border: solid 1px #333;
     border-radius: 5px;
 }
@@ -375,7 +375,7 @@ body {
     width: 70px;
     padding: 5px;
     color: #fff;
-    background-color: #1E88E5;
+    background-color: #3cb371;
     border-radius: 5px;
 }
 
@@ -415,6 +415,10 @@ body {
     margin-bottom: 20px;
 }
 
+.page-userEdit .main-contents .form-area .note {
+    font-size: 14px;
+}
+
 .page-userEdit .main-contents .input-area {
     width: 300px;
     padding: 7px 10px;
@@ -431,7 +435,7 @@ body {
     width: 70px;
     padding: 5px;
     color: #fff;
-    background-color: #1E88E5;
+    background-color: #3cb371;
     border-radius: 5px;
 }
 
