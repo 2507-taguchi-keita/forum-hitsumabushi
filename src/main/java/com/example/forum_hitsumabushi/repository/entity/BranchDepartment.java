@@ -9,10 +9,10 @@ import org.hibernate.annotations.UpdateTimestamp;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "messages")
+@Table(name = "branchdepartment")
 @Getter
 @Setter
-public class Message {
+public class BranchDepartment {
 
     @Id
     @Column
@@ -20,23 +20,19 @@ public class Message {
     private Integer id;
 
     @Column
-    private String title;
+    private Integer branchId;
 
     @Column
-    private String text;
+    private Integer departmentId;
 
     @Column
-    private String category;
+    private boolean isAll;
 
-    @Column(name = "created_date")
     @CreationTimestamp
+    @Column(updatable = false, name = "created_date")
     private LocalDateTime createdDate;
 
     @Column(name = "updated_date")
     @UpdateTimestamp
     private LocalDateTime updatedDate;
-
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
 }

@@ -7,17 +7,10 @@ import java.time.LocalDate;
 
 @Getter
 @Setter
-public class UserMessageForm {
+public class BranchForm {
 
     private Integer id;
-    private String account;
     private String name;
-    private Integer branchId;
-    private Integer departmentId;
-    private Integer userId;
-    private String title;
-    private String text;
-    private String category;
     private LocalDate createdDate;
     private LocalDate updatedDate;
 }

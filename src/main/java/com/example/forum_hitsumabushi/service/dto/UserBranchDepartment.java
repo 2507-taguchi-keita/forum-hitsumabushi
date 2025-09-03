@@ -11,17 +11,21 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserMessage {
+public class UserBranchDepartment {
 
+    // users
     private Integer id;
-    private String title;
-    private String text;
-    private String category;
-    private LocalDateTime createdDate;
-    private LocalDateTime updatedDate;
-    private Integer userId;
     private String account;
     private String name;
     private Integer branchId;
     private Integer departmentId;
+    private Integer isStopped;
+    private LocalDateTime createdDate;
+    private LocalDateTime updatedDate;
+
+    // branches
+    private String branchName;
+
+    // departments
+    private String departmentName;
 }

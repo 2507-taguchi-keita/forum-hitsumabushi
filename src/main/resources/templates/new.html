@@ -14,7 +14,7 @@
             <div class="main-contents">
                 <form method="post" action="/add" th:object="${messageForm}">
                     <!-- 件名 -->
-                    <div class="form-title">
+                    <div class="form-area">
                         <label>件名</label>
                         <br>
                         <textarea class="input-area" rows="1" th:field="*{title}"></textarea>
@@ -27,7 +27,7 @@
                     </div>
 
                     <!-- カテゴリー -->
-                    <div class="form-category">
+                    <div class="form-area">
                         <label>カテゴリー</label>
                         <br>
                         <textarea class="input-area" rows="1" th:field="*{category}"></textarea>
@@ -40,7 +40,7 @@
                     </div>
 
                     <!-- 投稿内容 -->
-                    <div class="form-content">
+                    <div class="form-area">
                         <label>投稿内容</label>
                         <br>
                         <textarea class="input-area" rows="10" th:field="*{text}"></textarea>
@@ -53,13 +53,13 @@
                     </div>
 
                     <!-- 追加ボタン -->
-                    <button class="btn-add" type="submit">追加</button>
+                    <button class="btn-add btn" type="submit">追加</button>
                 </form>
             </div>
 
             <div class="btn-return">
                 <form action="/">
-                    <button type="submit">戻る</button>
+                    <button class="btn" type="submit">戻る</button>
                 </form>
             </div>
         </div>

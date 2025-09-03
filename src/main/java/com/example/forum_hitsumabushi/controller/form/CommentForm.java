@@ -14,7 +14,7 @@ public class CommentForm {
     private Integer id;
 
     @NotOnlyWhitespace(message = "メッセージを入力してください")
-    @CharacterLimit(limit = 500, message = "500文字以内で入力してください")
+    @CharacterLimit(max = 500, message = "500文字以内で入力してください")
     private String text;
     private Integer userId;
     private Integer messageId;

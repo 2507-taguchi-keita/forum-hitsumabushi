@@ -19,7 +19,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -35,6 +34,13 @@ public class HomeController {
     @GetMapping("/")
     public ModelAndView home(@ModelAttribute("filterForm") FilterForm filterForm, Model model, HttpSession session) {
         ModelAndView mav = new ModelAndView();
+
+        // 初回アクセス時の処理
+        UserForm user = (UserForm) session.getAttribute("loginUser");
+        if (user == null) {
+            return new ModelAndView("forward:/login");
+        }
+
         // フォームから受け取った値
         LocalDate startDate = filterForm.getStartDate();
         LocalDate endDate = filterForm.getEndDate();
@@ -59,12 +65,6 @@ public class HomeController {
 
         filterDto.setCategory(filterForm.getCategory());
         List<UserMessageForm> userMessageList = messageService.findAllUserMessages(filterDto);
-
-        // 初回アクセス時の処理
-        UserForm user = (UserForm) session.getAttribute("loginUser");
-        if (user == null) {
-            return new ModelAndView("forward:/login");
-        }
 
         mav.addObject("messageList", userMessageList);
         mav.addObject("comments", commentService.findAllUserComment());
@@ -91,6 +91,18 @@ public class HomeController {
         }
 
         mav.setViewName("/new");
+        return mav;
+    }
+
+    // ユーザー管理画面の表示
+    @GetMapping("/admin")
+    public ModelAndView adminUser() {
+        ModelAndView mav = new ModelAndView();
+
+        List<UserForm> allUser = userService.findAllUser();
+
+        mav.addObject("users", allUser);
+        mav.setViewName("/user");
         return mav;
     }
 

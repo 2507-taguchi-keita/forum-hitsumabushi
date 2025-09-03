@@ -5,7 +5,6 @@ import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 // 投稿を絞り込むための日付情報を保管するのに使用。
 @Getter

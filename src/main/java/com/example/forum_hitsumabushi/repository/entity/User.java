@@ -9,10 +9,7 @@ import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
-
 
 @Entity
 @Table(name = "users")
@@ -33,11 +30,13 @@ public class User {
     @Column
     private String name;
 
-    @Column
-    private Integer branchId;
+    @ManyToOne
+    @JoinColumn(name = "branch_id")
+    private Branch branch;
 
-    @Column
-    private Integer departmentId;
+    @ManyToOne
+    @JoinColumn(name = "department_id")
+    private Department department;
 
     @Column
     private Integer isStopped;

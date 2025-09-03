@@ -9,34 +9,23 @@ import org.hibernate.annotations.UpdateTimestamp;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "messages")
+@Table(name = "departments")
 @Getter
 @Setter
-public class Message {
-
+public class Department {
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column
-    private String title;
+    private String name;
 
-    @Column
-    private String text;
-
-    @Column
-    private String category;
-
-    @Column(name = "created_date")
     @CreationTimestamp
+    @Column(updatable = false, name = "created_date")
     private LocalDateTime createdDate;
 
     @Column(name = "updated_date")
     @UpdateTimestamp
     private LocalDateTime updatedDate;
-
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
 }

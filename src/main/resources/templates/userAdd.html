@@ -1,11 +1,146 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <link th:href="@{/css/style.css}" rel="stylesheet">
-    <title>TOP</title>
-</head>
-<body>
 
-</body>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <link th:href="@{/css/style.css}" rel="stylesheet">
+        <title>ユーザー登録</title>
+    </head>
+
+    <body>
+        <div class="page-userAdd">
+            <h1>ユーザー登録</h1>
+
+            <div class="main-contents">
+                <form method="post" th:action="@{/register}" th:object="${userForm}">
+                    <!-- アカウント -->
+                    <div class="form-area">
+                        <label>アカウント名</label>
+                        <br>
+                        <textarea class="input-area" rows="1" th:field="*{account}"></textarea>
+
+                        <!-- 入力エラー表示 -->
+                        <div th:if="${#fields.hasErrors('account')}"
+                             th:errors="*{account}"
+                             style="color:red;">
+                        </div>
+
+                        <!-- 重複エラー表示 -->
+                        <div th:if="${errorAccount != null}" th:text="${errorAccount}" style="color: red;">
+                        </div>
+                    </div>
+
+                    <!-- パスワード -->
+                    <div class="form-area">
+                        <label>パスワード</label>
+                        <br>
+                        <input id="password" class="input-area" type="password" th:field="*{password}">
+
+                        <!-- 入力エラー表示 -->
+                        <div th:if="${#fields.hasErrors('password')}"
+                             th:errors="*{password}"
+                             style="color:red;">
+                        </div>
+
+                        <!-- 確認用との不一致エラー -->
+                        <div th:if="${errorPassword != null}" th:text="${errorPassword}" style="color: red;">
+                        </div>
+                    </div>
+
+                    <!-- パスワード確認用 -->
+                    <div class="form-area form-password-chkOnly">
+                        <label>パスワード(確認用)</label>
+                        <br>
+                        <input id="password-chk" class="input-area" type="password" name="passwordChk">
+
+                        <div class="radio-pwVisible">
+                            <input id="pwVisible" class="pwVisible" type="checkbox" onclick="passwordVisibility()" >
+                            <label>パスワード表示</label>
+                        </div>
+
+                        <!-- 入力エラー表示 -->
+                        <div th:if="${#fields.hasErrors('password')}"
+                             th:errors="*{password}"
+                             style="color:red;">
+                        </div>
+                    </div>
+
+                    <!-- 氏名 -->
+                    <div class="form-area">
+                        <label>氏名</label>
+                        <br>
+                        <textarea class="input-area" rows="1" th:field="*{name}"></textarea>
+
+                        <!-- 入力エラー表示 -->
+                        <div th:if="${#fields.hasErrors('name')}"
+                             th:errors="*{name}"
+                             style="color:red;">
+                        </div>
+                    </div>
+
+                    <!-- 支社 -->
+                    <div class="form-area">
+                        <label>支社</label>
+                        <br>
+                        <select class="input-area" name="branch" th:field="*{branchId}">
+                            <option value="" selected></option>
+                            <option th:each="branch : ${branches}"
+                                    th:value="${branch.id}"
+                                    th:text="${branch.name}">
+                            </option>
+                        </select>
+
+                        <!-- 入力エラー表示 -->
+                        <div th:if="${#fields.hasErrors('branchId')}"
+                             th:errors="*{branchId}"
+                             style="color:red;">
+                        </div>
+                    </div>
+
+                    <!-- 部署 -->
+                    <div class="form-area">
+                        <label>部署</label>
+                        <br>
+                        <select class="input-area" name="department" th:field="*{departmentId}">
+                            <option value="" selected></option>
+                            <option th:each="department : ${departments}"
+                                    th:value="${department.id}"
+                                    th:text="${department.name}">
+                            </option>
+                        </select>
+
+                        <!-- 入力エラー表示 -->
+                        <div th:if="${#fields.hasErrors('departmentId')}"
+                             th:errors="*{departmentId}"
+                             style="color:red;">
+                        </div>
+
+                        <!-- 支社と部署の組み合わせエラー表示 -->
+                        <div th:if="${errorBranchDepart != null}" th:text="${errorBranchDepart}" style="color: red;">
+                        </div>
+                    </div>
+
+                    <!-- 登録ボタン -->
+                    <button class="btn-add btn" type="submit">登録</button>
+                </form>
+            </div>
+
+            <div class="btn-return">
+                <form action="/admin">
+                    <button class="btn" type="submit">戻る</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- パスワードの表示/非表示を切り替え -->
+        <script>
+            function passwordVisibility() {
+                const password = document.getElementById("password-chk");
+                const checkbox = document.getElementById("pwVisible");
+
+                password.type = checkbox.checked ? "text" : "password";
+            }
+        </script>
+
+    </body>
 </html>
