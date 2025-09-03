@@ -40,9 +40,9 @@ public class LoginFilter implements Filter {
         httpResponse.sendRedirect("/login?error=unauthorized");
     }
 
-    @Override
-    public void init(FilterConfig config) {
-    }
+//    @Override
+//    public void init(FilterConfig config) {
+//    }
 
     @Override
     public void destroy() {

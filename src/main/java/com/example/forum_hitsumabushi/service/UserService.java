@@ -130,8 +130,8 @@ public class UserService {
             user.setBranchId(result.getBranchId());
             user.setDepartmentId(result.getDepartmentId());
             user.setIsStopped(result.getIsStopped());
-            user.setCreatedDate(result.getCreatedDate().toLocalDate());
-            user.setUpdatedDate(result.getUpdatedDate().toLocalDate());
+            user.setCreatedDate(result.getCreatedDate());
+            user.setUpdatedDate(result.getUpdatedDate());
             user.setBranchName(result.getBranchName());
             user.setDepartmentName(result.getDepartmentName());
             users.add(user);
@@ -198,8 +198,8 @@ public class UserService {
             user.setBranchId(result.getBranch().getId());
             user.setDepartmentId(result.getDepartment().getId());
             user.setIsStopped(result.getIsStopped());
-            user.setCreatedDate(result.getCreatedDate().toLocalDate());
-            user.setUpdatedDate(result.getUpdatedDate().toLocalDate());
+            user.setCreatedDate(result.getCreatedDate());
+            user.setUpdatedDate(result.getUpdatedDate());
             users.add(user);
         }
         return users;
@@ -215,8 +215,8 @@ public class UserService {
 
             branch.setId(result.getId());
             branch.setName(result.getName());
-            branch.setCreatedDate(result.getCreatedDate().toLocalDate());
-            branch.setUpdatedDate(result.getUpdatedDate().toLocalDate());
+            branch.setCreatedDate(result.getCreatedDate());
+            branch.setUpdatedDate(result.getUpdatedDate());
             branches.add(branch);
         }
         return branches;
@@ -232,8 +232,8 @@ public class UserService {
 
             department.setId(result.getId());
             department.setName(result.getName());
-            department.setCreatedDate(result.getCreatedDate().toLocalDate());
-            department.setUpdatedDate(result.getUpdatedDate().toLocalDate());
+            department.setCreatedDate(result.getCreatedDate());
+            department.setUpdatedDate(result.getUpdatedDate());
             departments.add(department);
         }
         return departments;

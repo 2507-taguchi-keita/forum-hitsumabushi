@@ -12,7 +12,14 @@
             <input class="button-logout" type="submit" value="ログアウト">
         </form>
 
-        <a class="btn-userManage" th:href="@{/admin}">ユーザ管理</a>
+        <div class="userManage-wrap">
+            <a class="btn-userManage" th:href="@{/admin}">ユーザ管理</a>
+
+            <!-- ユーザー管理画面へのアクセスに関するエラーメッセージ -->
+            <div th:if="${errorCode}">
+                <p th:text="${errorCode}" style="color:red;"></p>
+            </div>
+        </div>
     </div>
 </div>
 <div class="main-contens">

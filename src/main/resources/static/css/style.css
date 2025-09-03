@@ -81,6 +81,27 @@ body {
     transition: 0.3s ease-in-out;
 }
 
+/*ユーザー管理ボタン*/
+.header-contents .header .userManage-wrap {
+    margin: 20px 0 30px;
+}
+
+.header-contents .header .userManage-wrap .btn-userManage {
+    display: block;
+    width: 110px;
+    padding: 5px;
+    text-align: center;
+    text-decoration: none;
+    color: #fff;
+    background-color: #1E88E5;
+    border: solid 1px #333;
+    border-radius: 5px;
+}
+.header-contents .header .btn-userManage:hover {
+    cursor: pointer;
+    opacity: 0.7;
+}
+
 /* --- 本文 --- */
 .main-contents message span {
     white-space: pre-wrap;
@@ -283,6 +304,7 @@ body {
     text-decoration: none;
     color: #fff;
     background-color: #1E88E5;
+    border: solid 1px #333;
     border-radius: 5px;
 }
 
