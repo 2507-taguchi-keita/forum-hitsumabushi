@@ -24,7 +24,7 @@ public interface CommentRepository extends JpaRepository<Comment, Integer> {
     )
     FROM Comment comment
     JOIN comment.user user
-    ORDER BY comment.updatedDate DESC
+    ORDER BY comment.createdDate ASC
 """)
     List<UserComment> findAllUserComments();
 }

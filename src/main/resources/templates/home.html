@@ -15,7 +15,7 @@
         <a class="btn-userManage" th:href="@{/admin}">ユーザ管理</a>
     </div>
 </div>
-<div class="main-contens">
+<div class="main-contents">
     <h1 class="title">掲示板</h1>
     <div class="button-new">
         <a th:href="@{/new}"><span>新規投稿</span></a>
@@ -38,7 +38,6 @@
             <span th:text="${message.createdDate != null ? #temporals.format(message.createdDate, 'yyyy/MM/dd') : ''}"></span>
         </div>
         <div>投稿者：<span th:text="${message.account}"></span></div>
-        <br>
         <div th:if="${loginUser.id == message.userId}" class="message-delete">
             <form th:action="@{/delete/{id}(id=${message.id})}" th:method="post" onsubmit="return confirmDelete();">
                 <input type="hidden" name="_method" value="delete"/>
@@ -56,7 +55,6 @@
                 <div class="comment-date" style="font-size: small; color: gray;">
                     <span th:text="${comment.createdDate != null} ? ${#temporals.format(comment.createdDate, 'yyyy/MM/dd')} : ''"></span>
                 </div>
-                <br>
                 <div th:if="${loginUser.id == comment.userId}" class="comment-delete">
                     <form th:action="@{/comment/delete/{id}(id=${comment.id})}" method="post" onsubmit="return confirmDelete();">
                         <input type="hidden" name="_method" value="delete"/>

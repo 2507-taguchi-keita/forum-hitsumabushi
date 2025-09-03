@@ -94,25 +94,27 @@ body {
 }
 
 /*コメントテキストボックス*/
-.main-contents .comment-form form .textarea {
+.main-contents .comment-form form textarea {
     width: 500px;
+    height: 70px;
+    font-size: 14px;
 }
 
 /*投稿削除ボタン*/
 .message .message-delete form input[type="submit"] {
     background-color: #fff;
-    border: solid 2px #2f4f4f;
-    color: #2f4f4f;
-    padding: 5px 15px;
+    border: solid 2px #ea553a;
+    color: #ea553a;
+    padding: 3px 10px;
     text-decoration: none;
-    font-size: 15px;
+    font-size: 13px;
     cursor: pointer;
     border-radius: 8px;
 }
 
 .message .message-delete form input[type="submit"]:hover {
-    color: #2f4f4f;
-    background-color: #b0e0e6;
+    color: #ea553a;
+    background-color: #ffb6c1;
 }
 
 /*返信ボタン*/
@@ -135,18 +137,18 @@ body {
 /*コメント削除ボタン*/
 .replies .replies-delete form button[type="submit"] {
     background-color: #fff;
-    border: solid 2px #2f4f4f;
-    color: #2f4f4f;
-    padding: 5px 15px;
+    border: solid 2px #ea553a;
+    color: #ea553a;
+    padding: 3px 10px;
     text-decoration: none;
-    font-size: 15px;
+    font-size: 13px;
     cursor: pointer;
     border-radius: 8px;
 }
 
 .replies .replies-delete .comment-delete form button[type="submit"]:hover{
-    color: #2f4f4f;
-    background-color: #b0e0e6;
+    color: #ea553a;
+    background-color: #ffb6c1;
 }
 
 
