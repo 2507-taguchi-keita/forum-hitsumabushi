@@ -38,13 +38,14 @@
     </div>
     <div class="message" th:each="message : ${messageList}">
         <hr />
-        <h3 th:text="${message.title}">件名</h3>
-        <div>本文：<span th:text="${message.text}"></span></div>
-        <div>カテゴリー：<span th:text="${message.category}"></span></div>
-        <div>投稿日時：
+        <div class="message-datetime">投稿日時：
             <span th:text="${message.createdDate != null ? #temporals.format(message.createdDate, 'yyyy/MM/dd') : ''}"></span>
         </div>
-        <div>投稿者：<span th:text="${message.account}"></span></div>
+        <div class="messager">投稿者：<span th:text="${message.account}"></span></div>
+        <h3 class="subject" th:text="${message.title}">件名</h3>
+        <br>
+        <div class="main-text"><span th:text="${message.text}"></span></div>
+        <div class="message-category">カテゴリー：<span th:text="${message.category}"></span></div>
         <div th:if="${loginUser.id == message.userId}" class="message-delete">
             <form th:action="@{/delete/{id}(id=${message.id})}" th:method="post" onsubmit="return confirmDelete();">
                 <input type="hidden" name="_method" value="delete"/>

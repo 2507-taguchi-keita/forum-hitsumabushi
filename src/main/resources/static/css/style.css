@@ -16,6 +16,37 @@ body {
     background-color: #f0f0f0;
 }
 
+/*ホーム画面*/
+.main-contents .message .subject {
+    font-size: 20px;
+}
+
+.main-contents .message .main-text {
+    font-size: 18px;
+}
+
+.main-contents .message .message-category {
+    font-size: 13px;
+}
+
+.main-contents .message .message-datetime {
+    font-size: 13px;
+}
+
+.main-contents .message .messager {
+    font-size: 13px;
+}
+
+.subject {
+    clear: both;
+}
+
+.message-datetime,
+.messager {
+    float: left;
+    padding: 10px;
+}
+
 /*新規投稿ボタン*/
 .button-new a {
     background-color: #fff;
@@ -58,6 +89,7 @@ body {
     border: 0.2rem solid #543618;
     box-shadow: 0.2rem 0.2rem 0px 0.1rem #cccccc;
     cursor: pointer;
+    float: right;
 }
 
 .header-contents .header form .button-logout:hover {
@@ -103,7 +135,7 @@ body {
 }
 
 /* --- 本文 --- */
-.main-contents message span {
+.main-contents .message .main-text span {
     white-space: pre-wrap;
     word-break: break-all;
 }
