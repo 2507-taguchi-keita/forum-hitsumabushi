@@ -59,7 +59,7 @@ public class UserEditController {
 
         // パスワードチェック -----
         String password = userForm.getPassword();
-        if (!password.matches("^[\\x20-\\x7E]{6,20}$")){
+        if (!password.isEmpty() && !password.matches("^[\\x20-\\x7E]{6,20}$")){
             redirectAttributes.addFlashAttribute("errorPassword", "パスワードは半角文字かつ6文字以上20文字以下で入力してください");
             return new ModelAndView("redirect:/editUser/{id}");
         } else if (!password.equals(passwordChk)) {
