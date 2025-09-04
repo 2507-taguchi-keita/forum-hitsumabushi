@@ -74,11 +74,10 @@ body {
 }
 
 /*ログアウトボタン*/
-.header-contents .header form .button-logout {
+.header-contents .header .logout-form .button-logout {
     position: relative;
     justify-content: space-around;
     align-items: center;
-    margin: 0 auto;
     max-width: 240px;
     padding: 10px 25px;
     color: #543618;
@@ -89,7 +88,11 @@ body {
     border: 0.2rem solid #543618;
     box-shadow: 0.2rem 0.2rem 0px 0.1rem #cccccc;
     cursor: pointer;
-    float: right;
+}
+
+.header-contents .header .logout-form {
+    display: flex;
+    justify-content: flex-end;
 }
 
 .header-contents .header form .button-logout:hover {
@@ -115,7 +118,7 @@ body {
 
 /*ユーザー管理ボタン*/
 .header-contents .header .userManage-wrap {
-    margin: 20px 0 30px;
+    margin-bottom: 20px;
 }
 
 .header-contents .header .userManage-wrap .btn-userManage {
