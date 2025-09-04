@@ -1,9 +1,6 @@
 package com.example.forum_hitsumabushi.controller.form;
 
-import com.example.forum_hitsumabushi.validation.AccountNotWhitespace;
-import com.example.forum_hitsumabushi.validation.CharacterLimit;
-import com.example.forum_hitsumabushi.validation.NotOnlyWhitespace;
-import com.example.forum_hitsumabushi.validation.PasswordNotWhitespace;
+import com.example.forum_hitsumabushi.validation.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,11 +15,11 @@ public class UserForm {
     private Integer id;
 
     @NotOnlyWhitespace(message = "アカウントを入力してください", groups = AccountNotWhitespace.class)
-    @CharacterLimit(min = 6, max = 20, regexp = "^[a-zA-Z0-9]+$", message = "アカウントは半角英数字かつ6文字以上20文字以下で入力してください", groups = AccountNotWhitespace.class)
+    @CharacterLimit(min = 6, max = 20, regexp = "^[a-zA-Z0-9]+$", message = "アカウントは半角英数字かつ6文字以上20文字以下で入力してください", groups = AccountCharaLimit.class)
     private String account;
 
     @NotOnlyWhitespace(message = "パスワードを入力してください", groups = PasswordNotWhitespace.class)
-    @CharacterLimit(min = 6, max = 20, regexp = "^[\\x20-\\x7E]+$", message = "パスワードは半角文字かつ6文字以上20文字以下で入力してください", groups = PasswordNotWhitespace.class)
+    @CharacterLimit(min = 6, max = 20, regexp = "^[\\x20-\\x7E]+$", message = "パスワードは半角文字かつ6文字以上20文字以下で入力してください", groups = PasswordCharaLimit.class)
     private String password;
 
     @NotOnlyWhitespace(message = "氏名を入力してください")

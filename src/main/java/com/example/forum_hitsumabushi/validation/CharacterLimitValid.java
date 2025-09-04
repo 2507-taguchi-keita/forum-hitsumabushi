@@ -24,7 +24,7 @@ public class CharacterLimitValid implements ConstraintValidator<CharacterLimit, 
         String characterCountCheck = value.replaceAll("\\r?\\n", "");
 
         // 文字数の判定
-        if (characterCountCheck.length() < min && characterCountCheck.length() > max) {
+        if (characterCountCheck.length() < min || characterCountCheck.length() > max) {
             return false;
         }
 

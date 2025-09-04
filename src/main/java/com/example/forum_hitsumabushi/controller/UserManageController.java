@@ -3,7 +3,9 @@ package com.example.forum_hitsumabushi.controller;
 import com.example.forum_hitsumabushi.controller.form.UserForm;
 import com.example.forum_hitsumabushi.service.UserService;
 import com.example.forum_hitsumabushi.utils.CipherUtil;
+import com.example.forum_hitsumabushi.validation.AccountCharaLimit;
 import com.example.forum_hitsumabushi.validation.AccountNotWhitespace;
+import com.example.forum_hitsumabushi.validation.PasswordCharaLimit;
 import com.example.forum_hitsumabushi.validation.PasswordNotWhitespace;
 import jakarta.validation.groups.Default;
 import lombok.extern.slf4j.Slf4j;
@@ -43,7 +45,7 @@ public class UserManageController {
     // ユーザーの登録
     @PostMapping("/register")
     public ModelAndView registerUser(
-            @ModelAttribute("userForm") @Validated({Default.class, AccountNotWhitespace.class, PasswordNotWhitespace.class}) UserForm userForm,
+            @ModelAttribute("userForm") @Validated({Default.class, AccountNotWhitespace.class, PasswordNotWhitespace.class, AccountCharaLimit.class, PasswordCharaLimit.class}) UserForm userForm,
             BindingResult bindingResult,
             RedirectAttributes redirectAttributes,
             @RequestParam("passwordChk") String passwordChk) {
