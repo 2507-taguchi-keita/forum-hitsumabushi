@@ -66,15 +66,15 @@ body {
     cursor: pointer;
 }
 
-/*ユーザ管理ボタン*/
-.header-contents .header a.user-manage-btn {
-    position: absolute;
-    top: 10px;
-    right: 10px;
+/*ホーム画面ヘッダー*/
+.header-contents .header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
 }
 
 /*ログアウトボタン*/
-.header-contents .header .logout-form .button-logout {
+.header-contents .header form .button-logout {
     position: relative;
     justify-content: space-around;
     align-items: center;
@@ -88,11 +88,6 @@ body {
     border: 0.2rem solid #543618;
     box-shadow: 0.2rem 0.2rem 0px 0.1rem #cccccc;
     cursor: pointer;
-}
-
-.header-contents .header .logout-form {
-    display: flex;
-    justify-content: flex-end;
 }
 
 .header-contents .header form .button-logout:hover {
@@ -117,10 +112,6 @@ body {
 }
 
 /*ユーザー管理ボタン*/
-.header-contents .header .userManage-wrap {
-    margin-bottom: 20px;
-}
-
 .header-contents .header .userManage-wrap .btn-userManage {
     display: block;
     width: 110px;

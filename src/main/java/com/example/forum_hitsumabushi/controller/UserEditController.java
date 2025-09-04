@@ -2,7 +2,10 @@ package com.example.forum_hitsumabushi.controller;
 
 import com.example.forum_hitsumabushi.controller.form.UserForm;
 import com.example.forum_hitsumabushi.service.UserService;
+import com.example.forum_hitsumabushi.utils.CipherUtil;
+import com.example.forum_hitsumabushi.validation.AccountCharaLimit;
 import com.example.forum_hitsumabushi.validation.AccountNotWhitespace;
+import com.example.forum_hitsumabushi.validation.PasswordCharaLimit;
 import jakarta.validation.groups.Default;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -41,7 +44,7 @@ public class UserEditController {
     // ユーザー情報の更新
     @PutMapping("/updateUser/{id}")
     public ModelAndView updateUser(
-            @ModelAttribute("userForm") @Validated({Default.class, AccountNotWhitespace.class}) UserForm userForm,
+            @ModelAttribute("userForm") @Validated({Default.class, AccountNotWhitespace.class, AccountCharaLimit.class}) UserForm userForm,
             BindingResult bindingResult,
             RedirectAttributes redirectAttributes,
             @PathVariable Integer id,
@@ -56,7 +59,7 @@ public class UserEditController {
 
         // パスワードチェック -----
         String password = userForm.getPassword();
-        if (password.matches("^\\x20-\\x7E+$") && password.length() > 5 && password.length() < 21){
+        if (!password.matches("^[\\x20-\\x7E]{6,20}$")){
             redirectAttributes.addFlashAttribute("errorPassword", "パスワードは半角文字かつ6文字以上20文字以下で入力してください");
             return new ModelAndView("redirect:/editUser/{id}");
         } else if (!password.equals(passwordChk)) {
@@ -78,6 +81,10 @@ public class UserEditController {
             redirectAttributes.addFlashAttribute("errorAccount", "アカウントが重複しています");
             return new ModelAndView("redirect:/editUser/{id}");
         }
+
+        // パスワードの暗号化 -----
+        String encPassword = CipherUtil.encrypt(userForm.getPassword());
+        userForm.setPassword(encPassword);
 
         userService.saveUser(userForm);
         return new ModelAndView("redirect:/admin");

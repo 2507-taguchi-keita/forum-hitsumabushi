@@ -8,10 +8,6 @@
 <body>
 <div class="header-contents">
     <div class="header" th:if="${loginUser != null}">
-        <form class="logout-form" th:action="@{/logout}" method="post">
-            <input class="button-logout" type="submit" value="ログアウト">
-        </form>
-
         <div class="userManage-wrap">
             <a class="btn-userManage" th:if="${loginUser.departmentId == 1}" th:href="@{/admin}">ユーザ管理</a>
 
@@ -20,6 +16,10 @@
                 <p th:text="${errorCode}" style="color:red;"></p>
             </div>
         </div>
+
+        <form class="form-logout" th:action="@{/logout}" method="post">
+            <input class="button-logout" type="submit" value="ログアウト">
+        </form>
     </div>
 </div>
 <div class="main-contents">
