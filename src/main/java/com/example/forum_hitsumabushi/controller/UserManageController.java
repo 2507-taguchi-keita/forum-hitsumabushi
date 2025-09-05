@@ -26,7 +26,7 @@ public class UserManageController {
     UserService userService;
 
     // ユーザー登録画面の表示
-    @GetMapping("/addUser")
+    @GetMapping("/admin/addUser")
     public ModelAndView addUser(ModelMap model) {
         ModelAndView mav = new ModelAndView();
 
@@ -54,21 +54,23 @@ public class UserManageController {
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userForm", bindingResult);
             redirectAttributes.addFlashAttribute("userForm", userForm);
-            return new ModelAndView("redirect:/addUser");
+            return new ModelAndView("redirect:/admin/addUser");
         }
 
         // パスワードチェック -----
         String password = userForm.getPassword();
         if (!password.equals(passwordChk)) {
             redirectAttributes.addFlashAttribute("errorPassword", "パスワードと確認用パスワードが一致しません");
-            return new ModelAndView("redirect:/addUser");
+            redirectAttributes.addFlashAttribute("userForm", userForm);
+            return new ModelAndView("redirect:/admin/addUser");
         }
 
         // 支社と部署の組み合わせチェック -----
         boolean resultBranchDepart = userService.findByBranchDepartment(userForm.getBranchId(), userForm.getDepartmentId());
         if (!resultBranchDepart) {
             redirectAttributes.addFlashAttribute("errorBranchDepart", "支社と部署の組み合わせが不正です");
-            return new ModelAndView("redirect:/addUser");
+            redirectAttributes.addFlashAttribute("userForm", userForm);
+            return new ModelAndView("redirect:/admin/addUser");
         }
 
         // アカウントの重複チェック -----
@@ -76,7 +78,8 @@ public class UserManageController {
         boolean resultAccount = userService.findByAccount(null, userForm.getAccount());
         if (!resultAccount) {
             redirectAttributes.addFlashAttribute("errorAccount", "アカウントが重複しています");
-            return new ModelAndView("redirect:/addUser");
+            redirectAttributes.addFlashAttribute("userForm", userForm);
+            return new ModelAndView("redirect:/admin/addUser");
         }
 
         // パスワードの暗号化 -----

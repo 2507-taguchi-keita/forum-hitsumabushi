@@ -113,6 +113,7 @@ public class HomeController {
 
         UserForm loginUser = (UserForm) session.getAttribute("loginUser");
         model.addAttribute("loginUser", loginUser);
+
         mav.addObject("users", allUser);
         mav.setViewName("/user");
         return mav;

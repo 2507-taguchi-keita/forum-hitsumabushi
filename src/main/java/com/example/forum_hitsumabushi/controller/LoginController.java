@@ -59,7 +59,7 @@ public class LoginController {
             List<String> errorMessages = new ArrayList<String>();
             errorMessages.add("ログインに失敗しました");
             ModelAndView mav = new ModelAndView("login");
-            mav.addObject("loginError", errorMessages);
+            mav.addObject("errorCode", errorMessages);
             return mav;
         }
         session.setAttribute("loginUser", user);
