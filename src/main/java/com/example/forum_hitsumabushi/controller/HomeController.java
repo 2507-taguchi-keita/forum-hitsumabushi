@@ -29,8 +29,14 @@ public class HomeController {
     MessageService messageService;
 
     @GetMapping("/")
-    public ModelAndView top(){
-        return new ModelAndView("redirect:/forum-hitsumabushi");
+    public ModelAndView top(HttpSession session){
+        // 初回アクセス時の処理
+        UserForm user = (UserForm) session.getAttribute("loginUser");
+        if (user == null) {
+            return new ModelAndView("forward:/login");
+        } else {
+            return new ModelAndView("redirect:/forum-hitsumabushi");
+        }
     }
 
     @GetMapping("/forum-hitsumabushi")
@@ -42,12 +48,6 @@ public class HomeController {
             RedirectAttributes redirectAttributes) {
 
         ModelAndView mav = new ModelAndView();
-
-        // 初回アクセス時の処理
-        UserForm user = (UserForm) session.getAttribute("loginUser");
-        if (user == null) {
-            return new ModelAndView("forward:/login");
-        }
 
         // 管理者権限フィルターでエラーが返ってきたらエラーメッセージを詰めてリダイレクト
         if ("invalidAccess".equals(error)) {
