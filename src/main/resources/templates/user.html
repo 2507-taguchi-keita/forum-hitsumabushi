@@ -11,9 +11,15 @@
         <div class="page-user">
             <h1>ユーザー管理画面</h1>
 
+            <!-- ユーザー編集画面への不正アクセスに関するエラーメッセージ -->
+            <div th:if="${errorCode}">
+                <p th:text="${errorCode}" style="color:red;"></p>
+                <br>
+            </div>
+
             <div class="main-contents">
                 <div class="user-add">
-                    <a class="btn-userAdd btn" th:href="@{/addUser}">ユーザー追加</a>
+                    <a class="btn-userAdd btn" th:href="@{/admin/addUser}">ユーザー追加</a>
                 </div>
 
                 <div class="btn-return">
@@ -25,9 +31,12 @@
                 <table class="user-list">
                     <thead>
                         <tr>
+                            <th>ユーザーID</th>
                             <th>アカウント名</th>
                             <th>氏名</th>
+                            <th>支社ID</th>
                             <th>支社</th>
+                            <th>部署ID</th>
                             <th>部署</th>
                             <th>状態</th>
                             <th>登録日時</th>
@@ -39,14 +48,23 @@
                     <tbody>
                         <tr th:each="user : ${users}">
 
+                            <!-- ユーザーID -->
+                            <td class="user-id" th:text="${user.id}"></td>
+
                             <!-- アカウント名 -->
                             <td class="user-account" th:text="${user.account}"></td>
 
                             <!-- 氏名 -->
                             <td class="user-name" th:text="${user.name}"></td>
 
+                            <!-- 支社ID -->
+                            <td class="user-branchId" th:text="${user.branchId}"></td>
+
                             <!-- 支社 -->
                             <td class="user-branch" th:text="${user.branchName}"></td>
+
+                            <!-- 部署ID -->
+                            <td class="user-departmentId" th:text="${user.departmentId}"></td>
 
                             <!-- 部署 -->
                             <td class="user-department" th:text="${user.departmentName}"></td>
@@ -54,12 +72,13 @@
                             <!-- 状態 -->
                             <td class="user-status">
                                 <form th:action="@{/change/{id}(id=${user.id})}" th:method="put" onsubmit="return confirmChange();">
-                                    <select name="userStatus">
+                                    <!-- ログインユーザーIDと編集対象のIDが一致した場合は、選択できない仕様 -->
+                                    <select name="userStatus" th:disabled="${loginUser.id == user.id}">
                                         <option value="0" th:selected="${user.isStopped == 0}">稼働</option>
                                         <option value="1" th:selected="${user.isStopped == 1}">停止</option>
                                     </select>
 
-                                    <button class="btn" type="submit">変更</button>
+                                    <button class="btn" type="submit" th:if="${loginUser.id != user.id}">変更</button>
                                 </form>
                             </td>
 
@@ -71,7 +90,7 @@
 
                             <!-- 編集ボタン -->
                             <td class="user-edit">
-                                <form th:action="@{/editUser/{id}(id=${user.id})}" th:method="get" onsubmit="return confirmChange();">
+                                <form th:action="@{/admin/editUser/{id}(id=${user.id})}" th:method="get" onsubmit="return confirmChange();">
                                     <button class="btn" type="submit">編集</button>
                                 </form>
                             </td>

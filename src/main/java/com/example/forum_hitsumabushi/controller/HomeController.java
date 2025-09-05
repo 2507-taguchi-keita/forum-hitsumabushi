@@ -106,10 +106,13 @@ public class HomeController {
 
     // ユーザー管理画面の表示
     @GetMapping("/admin")
-    public ModelAndView adminUser() {
+    public ModelAndView adminUser(HttpSession session,Model model) {
         ModelAndView mav = new ModelAndView();
 
         List<UserForm> allUser = userService.findAllUser();
+
+        UserForm loginUser = (UserForm) session.getAttribute("loginUser");
+        model.addAttribute("loginUser", loginUser);
 
         mav.addObject("users", allUser);
         mav.setViewName("/user");

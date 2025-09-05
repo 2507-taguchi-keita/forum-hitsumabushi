@@ -78,11 +78,16 @@ public class UserService {
 
     // 編集対象のユーザー情報を取得（テーブル：users）
     public UserForm editUser(Integer id) {
-        List<User> results = new ArrayList<>();
-        results.add(userRepository.findById(id).orElse(null));
-        List<UserForm> users = setUser(results);
+        User userResult = userRepository.findById(id).orElse(null);
 
-        return users.get(0);
+        if (userResult == null) {
+            return null;
+        } else {
+            List<User> results = new ArrayList<>();
+            results.add(userResult);
+            List<UserForm> users = setUser(results);
+            return users.get(0);
+        }
     }
 
     // 支社情報を取得（テーブル：branches）
