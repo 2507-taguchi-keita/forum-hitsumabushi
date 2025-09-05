@@ -29,14 +29,14 @@ public class CommentController {
             session.setAttribute("messageId", messageId);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.commentForm", result);
             redirectAttributes.addFlashAttribute("commentForm", commentForm);
-            return new ModelAndView("redirect:/");
+            return new ModelAndView("redirect:/forum-hitsumabushi");
         }
         // セッションのログインユーザーを取得
         Integer loginUserId = ((UserForm) session.getAttribute("loginUser")).getId();
         // Service に処理を依頼
         commentService.addComment(messageId, commentForm, loginUserId);
         session.removeAttribute("messageId");
-        return new ModelAndView("redirect:/");
+        return new ModelAndView("redirect:/forum-hitsumabushi");
     }
 
     //コメント削除機能の実装(削除ボタンを押下した際の処理)
@@ -47,7 +47,7 @@ public class CommentController {
         commentService.deleteById(id);
         // rootつまり、⑤サーバー側：投稿内容表示機能の処理へリダイレクト
         //同じ画面を表示するには、Controllerに指示する必要がある。
-        return new ModelAndView("redirect:/");
+        return new ModelAndView("redirect:/forum-hitsumabushi");
     }
 
 }

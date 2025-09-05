@@ -27,4 +27,6 @@ public interface CommentRepository extends JpaRepository<Comment, Integer> {
     ORDER BY comment.createdDate ASC
 """)
     List<UserComment> findAllUserComments();
+
+    void deleteByMessageId(Integer id);
 }

@@ -13,11 +13,11 @@
 
             <div class="main-contents">
                 <div class="user-add">
-                    <a class="btn-userAdd btn" th:href="@{/addUser}">ユーザー追加</a>
+                    <a class="btn-userAdd btn" th:href="@{/addUser}">ユーザー新規登録</a>
                 </div>
 
                 <div class="btn-return">
-                    <form action="/">
+                    <form action="/forum-hitsumabushi" method="get">
                         <button class="btn" type="submit">戻る</button>
                     </form>
                 </div>
@@ -54,12 +54,9 @@
                             <!-- 状態 -->
                             <td class="user-status">
                                 <form th:action="@{/change/{id}(id=${user.id})}" th:method="put" onsubmit="return confirmChange();">
-                                    <select name="userStatus">
-                                        <option value="0" th:selected="${user.isStopped == 0}">稼働</option>
-                                        <option value="1" th:selected="${user.isStopped == 1}">停止</option>
-                                    </select>
-
-                                    <button class="btn" type="submit">変更</button>
+                                    <button class="btn" type="submit" name="userStatus" th:value="${user.isStopped == 0 ? 1 : 0}" th:text="${user.isStopped == 0 ? '停止' : '復活'}"
+                                            th:disabled="${loginUser.id == user.id}">
+                                    </button>
                                 </form>
                             </td>
 

@@ -29,7 +29,7 @@
     </div>
     <br>
     <div class="filtered-posts">
-        <form th:action="@{./}" method="get" th:object="${filterForm}">--
+        <form th:action="@{/forum-hitsumabushi}" method="get" th:object="${filterForm}">--
             <label>開始日 <input type="date" name="startDate" th:field="*{startDate}"></label>
             <label>終了日 <input type="date" name="endDate" th:field="*{endDate}"></label>
             <label>カテゴリー <input type="text" name="category" th:field="*{category}" placeholder="部分一致"></label>
@@ -58,7 +58,7 @@
             <div class="replies-delete" th:each="comment : ${comments}" th:if="${comment.messageId} == ${message.id}">
                 <hr/>
                 <div class="comment-text">
-                    返信 : <span th:text="${comment.text}"></span>
+                    <span th:text="${comment.text}"></span>
                 </div>
                 <div class="comment-date" style="font-size: small; color: gray;">
                     <span th:text="${comment.createdDate != null} ? ${#temporals.format(comment.createdDate, 'yyyy/MM/dd')} : ''"></span>

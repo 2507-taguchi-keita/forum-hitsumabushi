@@ -103,7 +103,7 @@ public class MessageService {
     // 投稿を削除する処理
     @Transactional
     public void deleteMessage(Integer id) {
-        //commentRepository.deleteByContentId(id);
+        commentRepository.deleteByMessageId(id);
         messageRepository.deleteById(id);
     }
 

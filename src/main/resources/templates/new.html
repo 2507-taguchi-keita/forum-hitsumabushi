@@ -41,7 +41,7 @@
 
                     <!-- 投稿内容 -->
                     <div class="form-area">
-                        <label>【投稿内容】</label>
+                        <label>【本文】</label>
                         <br>
                         <textarea class="input-area" rows="10" th:field="*{text}"></textarea>
 
@@ -53,12 +53,12 @@
                     </div>
 
                     <!-- 追加ボタン -->
-                    <button class="btn-add btn" type="submit">追加</button>
+                    <button class="btn-add btn" type="submit">投稿</button>
                 </form>
             </div>
 
             <div class="btn-return">
-                <form action="/">
+                <form action="/forum-hitsumabushi" method="get">
                     <button class="btn" type="submit">戻る</button>
                 </form>
             </div>

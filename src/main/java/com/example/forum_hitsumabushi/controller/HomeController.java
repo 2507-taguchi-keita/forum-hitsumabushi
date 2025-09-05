@@ -29,7 +29,7 @@ public class HomeController {
     MessageService messageService;
 
 
-    @GetMapping("/")
+    @GetMapping("/forum-hitsumabushi")
     public ModelAndView home(
             @ModelAttribute("filterForm") FilterForm filterForm,
             Model model,
@@ -48,7 +48,7 @@ public class HomeController {
         // 管理者権限フィルターでエラーが返ってきたらエラーメッセージを詰めてリダイレクト
         if ("invalidAccess".equals(error)) {
             redirectAttributes.addFlashAttribute("errorCode", "無効なアクセスです");
-            return new ModelAndView("redirect:/");
+            return new ModelAndView("redirect:/forum-hitsumabushi");
         }
 
         // フォームから受け取った値
@@ -106,11 +106,13 @@ public class HomeController {
 
     // ユーザー管理画面の表示
     @GetMapping("/admin")
-    public ModelAndView adminUser() {
+    public ModelAndView adminUser(HttpSession session, Model model) {
         ModelAndView mav = new ModelAndView();
 
         List<UserForm> allUser = userService.findAllUser();
 
+        UserForm loginUser = (UserForm) session.getAttribute("loginUser");
+        model.addAttribute("loginUser", loginUser);
         mav.addObject("users", allUser);
         mav.setViewName("/user");
         return mav;
@@ -120,6 +122,6 @@ public class HomeController {
     @DeleteMapping("/delete/{id}")
     public ModelAndView deleteMessage(@PathVariable Integer id){
         messageService.deleteMessage(id);
-        return new ModelAndView("redirect:/");
+        return new ModelAndView("redirect:/forum-hitsumabushi");
     }
 }

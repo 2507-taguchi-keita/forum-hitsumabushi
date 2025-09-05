@@ -63,7 +63,7 @@ public class LoginController {
             return mav;
         }
         session.setAttribute("loginUser", user);
-        return new ModelAndView("redirect:/");
+        return new ModelAndView("redirect:/forum-hitsumabushi");
     }
 
     @PostMapping("/logout")

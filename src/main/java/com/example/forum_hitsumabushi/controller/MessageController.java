@@ -39,6 +39,6 @@ public class MessageController {
 
         messageService.saveMessage(messageForm);
 
-        return new ModelAndView("redirect:/");
+        return new ModelAndView("redirect:/forum-hitsumabushi");
     }
 }
