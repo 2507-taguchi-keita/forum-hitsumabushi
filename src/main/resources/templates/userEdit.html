@@ -90,6 +90,7 @@
                                     th:text="${branch.name}">
                             </option>
                         </select>
+                        <input th:if="${loginUser.id == T(java.lang.Integer).parseInt(id)}" type="hidden" th:field="*{branchId}" />
 
                         <!-- 入力エラー表示 -->
                         <div th:if="${#fields.hasErrors('branchId')}"
@@ -110,6 +111,7 @@
                                     th:text="${department.name}">
                             </option>
                         </select>
+                        <input th:if="${loginUser.id == T(java.lang.Integer).parseInt(id)}" type="hidden" th:field="*{departmentId}" />
 
                         <!-- 入力エラー表示 -->
                         <div th:if="${#fields.hasErrors('departmentId')}"

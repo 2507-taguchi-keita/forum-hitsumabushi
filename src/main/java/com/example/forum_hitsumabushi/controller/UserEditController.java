@@ -74,7 +74,7 @@ public class UserEditController {
     // ユーザー情報の更新
     @PutMapping("/updateUser/{id}")
     public ModelAndView updateUser(
-            @ModelAttribute("userForm") @Validated({Default.class, AccountNotWhitespace.class, AccountCharaLimit.class}) UserForm userForm,
+            @ModelAttribute("userForm") @Validated({Default.class, AccountNotWhitespace.class, AccountCharaLimit.class, PasswordCharaLimit.class}) UserForm userForm,
             BindingResult bindingResult,
             RedirectAttributes redirectAttributes,
             @PathVariable Integer id,
@@ -89,11 +89,7 @@ public class UserEditController {
 
         // パスワードチェック -----
         String password = userForm.getPassword();
-        if (!password.isEmpty() && !password.matches("^[\\x20-\\x7E]{6,20}$")){
-            redirectAttributes.addFlashAttribute("errorPassword", "パスワードは半角文字かつ6文字以上20文字以下で入力してください");
-            redirectAttributes.addFlashAttribute("userForm", userForm);
-            return new ModelAndView("redirect:/admin/editUser/{id}");
-        } else if (!password.equals(passwordChk)) {
+        if (!password.equals(passwordChk)) {
             redirectAttributes.addFlashAttribute("errorPassword", "パスワードと確認用パスワードが一致しません");
             redirectAttributes.addFlashAttribute("userForm", userForm);
             return new ModelAndView("redirect:/admin/editUser/{id}");
