@@ -34,7 +34,7 @@ public class AdminFilter implements Filter {
 
                 // 総務人事（id＝1）以外でログインしていないかを判定（true → エラーメッセージを設定しホーム画面へリダイレクト）
                 if (departmentId != 1) {
-                    httpResponse.sendRedirect("/?error=invalidAccess");
+                    httpResponse.sendRedirect("/forum-hitsumabushi?error=invalidAccess");
                     return;
                 }
             }

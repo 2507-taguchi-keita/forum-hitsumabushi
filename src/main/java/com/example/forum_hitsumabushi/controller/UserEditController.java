@@ -92,7 +92,7 @@ public class UserEditController {
         if (!password.isEmpty() && !password.matches("^[\\x20-\\x7E]{6,20}$")){
             redirectAttributes.addFlashAttribute("errorPassword", "パスワードは半角文字かつ6文字以上20文字以下で入力してください");
             redirectAttributes.addFlashAttribute("userForm", userForm);
-            return new ModelAndView("redirect:/editUser/{id}");
+            return new ModelAndView("redirect:/admin/editUser/{id}");
         } else if (!password.equals(passwordChk)) {
             redirectAttributes.addFlashAttribute("errorPassword", "パスワードと確認用パスワードが一致しません");
             redirectAttributes.addFlashAttribute("userForm", userForm);

@@ -28,6 +28,10 @@ public class HomeController {
     @Autowired
     MessageService messageService;
 
+    @GetMapping("/")
+    public ModelAndView top(){
+        return new ModelAndView("redirect:/forum-hitsumabushi");
+    }
 
     @GetMapping("/forum-hitsumabushi")
     public ModelAndView home(
