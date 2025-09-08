@@ -57,11 +57,12 @@
         <div class="replies">
             <div class="replies-delete" th:each="comment : ${comments}" th:if="${comment.messageId} == ${message.id}">
                 <hr/>
+                <div class="comment-meta">
+                    投稿日時：<span class="comment-datetime" th:text="${comment.createdDate != null ? #temporals.format(comment.createdDate, 'yyyy/MM/dd') : ''}"></span>
+                    投稿者：<span class="comment-author" th:text="${comment.account}"></span>
+                </div>
                 <div class="comment-text">
                     <span th:text="${comment.text}"></span>
-                </div>
-                <div class="comment-date" style="font-size: small; color: gray;">
-                    <span th:text="${comment.createdDate != null} ? ${#temporals.format(comment.createdDate, 'yyyy/MM/dd')} : ''"></span>
                 </div>
                 <div th:if="${loginUser.id == comment.userId}" class="comment-delete">
                     <form th:action="@{/comment/delete/{id}(id=${comment.id})}" method="post" onsubmit="return confirmDelete();">

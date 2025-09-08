@@ -37,12 +37,20 @@ body {
     font-size: 13px;
 }
 
+.comment-meta {
+  display: flex;
+  gap: 10px;         /* 日付と投稿者の間に余白 */
+  font-size: 15px;
+  color: black;
+  margin-bottom: 5px;
+}
+
 .subject {
     clear: both;
 }
 
 .message-datetime,
-.messager {
+.messager  {
     float: left;
     padding: 10px;
 }
