@@ -61,8 +61,8 @@ public class MessageService {
             userMessage.setTitle(result.getTitle());
             userMessage.setText(result.getText());
             userMessage.setCategory(result.getCategory());
-            userMessage.setCreatedDate(result.getCreatedDate().toLocalDate());
-            userMessage.setUpdatedDate(result.getUpdatedDate().toLocalDate());
+            userMessage.setCreatedDate(result.getCreatedDate());
+            userMessage.setUpdatedDate(result.getUpdatedDate());
             userMessages.add(userMessage);
         }
         return userMessages;

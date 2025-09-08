@@ -43,7 +43,7 @@ public class CommentController {
     @DeleteMapping("/comment/delete/{id}")
     public ModelAndView deleteComment(@PathVariable Integer id) {
         //Service層にある投稿削除の処理を呼び出して実行する
-        //URLから取得してきたIDはレコードを指定する際に必要なので、引数に指定しReportServiceを呼出
+        //URLから取得してきたIDはコメントを指定する際に必要なので、引数に指定しServiceを呼出
         commentService.deleteById(id);
         // rootつまり、⑤サーバー側：投稿内容表示機能の処理へリダイレクト
         //同じ画面を表示するには、Controllerに指示する必要がある。

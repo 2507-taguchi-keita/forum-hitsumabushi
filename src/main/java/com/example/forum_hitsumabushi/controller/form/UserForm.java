@@ -14,8 +14,8 @@ public class UserForm {
     // users
     private Integer id;
 
-    @NotOnlyWhitespace(message = "アカウントを入力してください", groups = AccountNotWhitespace.class)
-    @CharacterLimit(min = 6, max = 20, regexp = "^[a-zA-Z0-9]+$", message = "アカウントは半角英数字かつ6文字以上20文字以下で入力してください", groups = AccountCharaLimit.class)
+    @NotOnlyWhitespace(message = "アカウント名を入力してください", groups = AccountNotWhitespace.class)
+    @CharacterLimit(min = 6, max = 20, regexp = "^[a-zA-Z0-9]+$", message = "アカウント名は半角英数字かつ6文字以上20文字以下で入力してください", groups = AccountCharaLimit.class)
     private String account;
 
     @NotOnlyWhitespace(message = "パスワードを入力してください", groups = PasswordNotWhitespace.class)

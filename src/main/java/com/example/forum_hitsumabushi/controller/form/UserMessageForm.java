@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -18,6 +19,6 @@ public class UserMessageForm {
     private String title;
     private String text;
     private String category;
-    private LocalDate createdDate;
-    private LocalDate updatedDate;
+    private LocalDateTime createdDate;
+    private LocalDateTime updatedDate;
 }

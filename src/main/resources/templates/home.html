@@ -29,7 +29,7 @@
     </div>
     <br>
     <div class="filtered-posts">
-        <form th:action="@{/forum-hitsumabushi}" method="get" th:object="${filterForm}">--
+        <form th:action="@{/forum-hitsumabushi}" method="get" th:object="${filterForm}">
             <label>開始日 <input type="date" name="startDate" th:field="*{startDate}"></label>
             <label>終了日 <input type="date" name="endDate" th:field="*{endDate}"></label>
             <label>カテゴリー <input type="text" name="category" th:field="*{category}" placeholder="部分一致"></label>
@@ -39,7 +39,7 @@
     <div class="message" th:each="message : ${messageList}">
         <hr />
         <div class="message-datetime">投稿日時：
-            <span th:text="${message.createdDate != null ? #temporals.format(message.createdDate, 'yyyy/MM/dd') : ''}"></span>
+            <span th:text="${message.createdDate != null ? #temporals.format(message.createdDate, 'yyyy/MM/dd HH:mm:ss') : ''}"></span>
         </div>
         <div class="messager">投稿者：<span th:text="${message.account}"></span></div>
         <h3 class="subject" th:text="${message.title}">件名</h3>
@@ -58,7 +58,7 @@
             <div class="replies-delete" th:each="comment : ${comments}" th:if="${comment.messageId} == ${message.id}">
                 <hr/>
                 <div class="comment-meta">
-                    投稿日時：<span class="comment-datetime" th:text="${comment.createdDate != null ? #temporals.format(comment.createdDate, 'yyyy/MM/dd') : ''}"></span>
+                    投稿日時：<span th:if="${comment.createdDate}" th:text="${#temporals.format(comment.createdDate, 'yyyy/MM/dd HH:mm:ss')}"></span>
                     投稿者：<span class="comment-author" th:text="${comment.account}"></span>
                 </div>
                 <div class="comment-text">

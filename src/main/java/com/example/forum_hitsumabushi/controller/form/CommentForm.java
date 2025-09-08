@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -18,6 +19,6 @@ public class CommentForm {
     private String text;
     private Integer userId;
     private Integer messageId;
-    private LocalDate createdDate;
-    private LocalDate updatedDate;
+    private LocalDateTime createdDate;
+    private LocalDateTime updatedDate;
 }
