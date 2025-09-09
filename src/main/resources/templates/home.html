@@ -11,6 +11,10 @@
         <div class="userManage-wrap">
             <a class="btn-userManage" th:if="${loginUser.departmentId == 1}" th:href="@{/admin}">ユーザ管理</a>
 
+            <div class="user-info">
+                <p>アカウント名：<span th:text="${loginUser.account}"></span></p>
+            </div>
+
             <!-- ユーザー管理画面へのアクセスに関するエラーメッセージ -->
             <div th:if="${errorCode}">
                 <p th:text="${errorCode}" style="color:red;"></p>
