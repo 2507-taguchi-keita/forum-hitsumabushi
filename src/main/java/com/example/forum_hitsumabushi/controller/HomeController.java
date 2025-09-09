@@ -125,8 +125,26 @@ public class HomeController {
 
     // 投稿の削除
     @DeleteMapping("/delete/{id}")
-    public ModelAndView deleteMessage(@PathVariable Integer id){
-        messageService.deleteMessage(id);
+    public ModelAndView deleteMessage(
+            @PathVariable Integer id,
+            @RequestParam("messageUserId") int messageUserId,
+            HttpSession session,
+            RedirectAttributes redirectAttributes){
+
+        // ログインユーザー情報の取得
+        UserForm login = (UserForm) session.getAttribute("loginUser");
+        // 削除対象の投稿ユーザー情報を取得
+        UserForm post = userService.editUser(messageUserId);
+
+        // 削除権限がある場合は削除処理、権限がない場合はエラーメッセージを返す
+        boolean checkResult = messageService.deleteMessageCheck(login, post);
+        if (checkResult) {
+            messageService.deleteMessage(id);
+        } else {
+            redirectAttributes.addFlashAttribute("errorMessageId", id);
+            redirectAttributes.addFlashAttribute("errorDelete", "権限がありません");
+        }
+
         return new ModelAndView("redirect:/forum-hitsumabushi");
     }
 }

@@ -1,9 +1,6 @@
 package com.example.forum_hitsumabushi.service;
 
-import com.example.forum_hitsumabushi.controller.form.FilterForm;
-import com.example.forum_hitsumabushi.controller.form.MessageForm;
-import com.example.forum_hitsumabushi.controller.form.UserCommentForm;
-import com.example.forum_hitsumabushi.controller.form.UserMessageForm;
+import com.example.forum_hitsumabushi.controller.form.*;
 import com.example.forum_hitsumabushi.repository.CommentRepository;
 import com.example.forum_hitsumabushi.repository.MessageRepository;
 import com.example.forum_hitsumabushi.repository.UserRepository;
@@ -18,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -105,6 +103,34 @@ public class MessageService {
     public void deleteMessage(Integer id) {
         commentRepository.deleteByMessageId(id);
         messageRepository.deleteById(id);
+    }
+
+    // 投稿の削除権限のチェック
+    public boolean deleteMessageCheck(UserForm login, UserForm post) {
+        int loginUser = login.getId();
+        int loginBranch = login.getBranchId();
+        int loginDepartment = login.getDepartmentId();
+        int postUser = post.getId();
+        int postBranch = post.getBranchId();
+        int postDepartment = post.getDepartmentId();
+
+        // 投稿の削除が可能な条件：下記①～③のいずれかを満たしている場合
+        // 　①ログインユーザーと投稿ユーザーが一致している場合
+        // 　②ログインユーザーが本社情報管理部(ID：2)である場合
+        // 　③下記3つの条件がすべて満たせている場合
+        // 　　- ログインユーザーの支社と投稿ユーザーの支社が同じ
+        // 　　- ログインユーザーは営業部(ID：3)
+        // 　　- 投稿ユーザーは技術部(ID：4)
+
+        if (loginUser == postUser) {
+            return true;
+        } else if ((loginBranch == 2) && (loginDepartment == 2)) {
+            return true;
+        } else if ((loginBranch == postBranch) && (loginDepartment == 3) && (postDepartment == 4)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public Message findMessageById(Integer id) {
