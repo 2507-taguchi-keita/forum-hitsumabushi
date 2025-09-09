@@ -122,6 +122,7 @@ body {
     justify-content: center;
     align-items: center;
     max-width: 240px;
+    margin-bottom: 10px;
     padding: 10px 25px;
     color: #543618;
     font-weight: 600;

@@ -11,6 +11,10 @@
         <div class="userManage-wrap">
             <a class="btn-userManage" th:if="${loginUser.departmentId == 1}" th:href="@{/admin}">ユーザ管理</a>
 
+            <div class="user-info">
+                <p>アカウント名：<span th:text="${loginUser.account}"></span></p>
+            </div>
+
             <!-- ユーザー管理画面へのアクセスに関するエラーメッセージ -->
             <div th:if="${errorCode}">
                 <p th:text="${errorCode}" style="color:red;"></p>
@@ -47,11 +51,18 @@
         <br>
         <div class="main-text"><span th:text="${message.text}"></span></div>
         <div class="message-category">カテゴリー：<span th:text="${message.category}"></span></div>
-        <div th:if="${loginUser.id == message.userId}" class="message-delete">
+        <div class="message-delete">
             <form th:action="@{/delete/{id}(id=${message.id})}" th:method="post" onsubmit="return confirmDelete();">
                 <input type="hidden" name="_method" value="delete"/>
+                <input type="hidden" name="messageUserId" th:value="${message.userId}"/>
                 <input class="button-delete" type="submit" value="削除">
             </form>
+
+            <!-- 削除権限に関するエラー表示 -->
+            <div th:if="${errorDelete}">
+                <p th:if="${message.id == errorMessageId}" th:text="${errorDelete}" style="color:red;"></p>
+                <br>
+            </div>
         </div>
         <br>
         <h4>コメント</h4>

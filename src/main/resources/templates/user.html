@@ -72,8 +72,9 @@
                             <!-- 状態 -->
                             <td class="user-status">
                                 <form th:action="@{/change/{id}(id=${user.id})}" th:method="put" onsubmit="return confirmChange();">
-                                    <button class="btn" type="submit" name="userStatus" th:value="${user.isStopped == 0 ? 1 : 0}" th:text="${user.isStopped == 0 ? '停止' : '復活'}"
-                                            th:disabled="${loginUser.id == user.id}">
+                                    <p>ユーザー状態：<span th:text="${user.isStopped == 0 ? '稼働中' : '停止中'}"></span></p>
+                                    <button class="btn" type="submit" name="userStatus" th:value="${user.isStopped == 0 ? 1 : 0}" th:disabled="${loginUser.id == user.id}">
+                                        <span th:text="${user.isStopped == 0 ? '停止' : '復活'}"></span>する
                                     </button>
                                 </form>
                             </td>
