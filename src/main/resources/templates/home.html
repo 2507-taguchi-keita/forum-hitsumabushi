@@ -39,7 +39,8 @@
     <div class="message" th:each="message : ${messageList}">
         <hr />
         <div class="message-datetime">投稿日時：
-            <span th:text="${message.createdDate != null ? #temporals.format(message.createdDate, 'yyyy/MM/dd HH:mm:ss') : ''}"></span>
+            <span th:text="${message.createdRelative}"></span>
+            (<span th:text="${message.createdDate != null ? #temporals.format(message.createdDate, 'yyyy/MM/dd HH:mm:ss') : ''}"></span>)
         </div>
         <div class="messager">投稿者：<span th:text="${message.account}"></span></div>
         <h3 class="subject" th:text="${message.title}">件名</h3>
@@ -58,7 +59,8 @@
             <div class="replies-delete" th:each="comment : ${comments}" th:if="${comment.messageId} == ${message.id}">
                 <hr/>
                 <div class="comment-meta">
-                    投稿日時：<span th:if="${comment.createdDate}" th:text="${#temporals.format(comment.createdDate, 'yyyy/MM/dd HH:mm:ss')}"></span>
+                    返信日時：<span th:text="${comment.createdRelative}"></span>
+                    (<span th:if="${comment.createdDate}" th:text="${#temporals.format(comment.createdDate, 'yyyy/MM/dd HH:mm:ss')}"></span>)
                     投稿者：<span class="comment-author" th:text="${comment.account}"></span>
                 </div>
                 <div class="comment-text">

@@ -1,5 +1,6 @@
 package com.example.forum_hitsumabushi.controller.form;
 
+import com.example.forum_hitsumabushi.utils.DateTimeUtil;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,5 +19,14 @@ public class UserCommentForm {
     private Integer messageId;
     private String text;
     private LocalDateTime createdDate;
+
+    //～秒前の表示に使用する
+    public String createdRelative;
+
     private LocalDateTime updatedDate;
+
+    public void setCreatedDate(LocalDateTime createdDate){
+        this.createdDate = createdDate;
+        this.createdRelative = DateTimeUtil.toRelative(createdDate);
+    }
 }
