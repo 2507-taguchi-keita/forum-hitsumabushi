@@ -12,6 +12,7 @@ import com.example.forum_hitsumabushi.repository.entity.Department;
 import com.example.forum_hitsumabushi.repository.entity.User;
 import com.example.forum_hitsumabushi.service.dto.UserBranchDepartment;
 import com.example.forum_hitsumabushi.utils.CipherUtil;
+import com.example.forum_hitsumabushi.utils.DateTimeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -241,4 +242,17 @@ public class UserService {
         return departments;
     }
 
+    public UserForm updateLastLogin(UserForm userForm) {
+        // ログインしたユーザーのIDで検索
+        User entity = userRepository.findById(userForm.getId())
+                .orElseThrow(() -> new RuntimeException("ユーザーが見つかりません"));
+
+        // 今だけ更新
+        entity.setLastLoginAt(LocalDateTime.now());
+        userRepository.save(entity);
+
+        // Formに反映して返却
+        userForm.setLastLoginAt(entity.getLastLoginAt());
+        return userForm;
+    }
 }

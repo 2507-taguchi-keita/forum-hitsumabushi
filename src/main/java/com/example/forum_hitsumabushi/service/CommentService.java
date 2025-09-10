@@ -9,6 +9,7 @@ import com.example.forum_hitsumabushi.repository.entity.Comment;
 import com.example.forum_hitsumabushi.repository.entity.Message;
 import com.example.forum_hitsumabushi.repository.entity.User;
 import com.example.forum_hitsumabushi.service.dto.UserComment;
+import com.example.forum_hitsumabushi.utils.DateTimeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -46,6 +47,8 @@ public class CommentService {
             userComment.setCreatedDate(result.getCreatedDate());
             userComment.setUpdatedDate(result.getUpdatedDate());
             userComment.setLastLoginAt(result.getLastLoginAt());
+            String createdRelative = DateTimeUtil.toRelative(result.getCreatedDate());
+            userComment.setCreatedRelative(createdRelative);
             userComments.add(userComment);
         }
         return userComments;

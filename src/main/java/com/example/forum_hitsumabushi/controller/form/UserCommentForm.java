@@ -19,22 +19,7 @@ public class UserCommentForm {
     private Integer messageId;
     private String text;
     private LocalDateTime createdDate;
-
-    //～秒前の表示に使用する
-    public String createdRelative;
-
+    private String createdRelative;
     private LocalDateTime updatedDate;
-
-    public void setCreatedDate(LocalDateTime createdDate){
-        this.createdDate = createdDate;
-        this.createdRelative = DateTimeUtil.toRelative(createdDate);
-    }
-
     private LocalDateTime lastLoginAt;
-    private String lastLoginRelative;
-
-    public void setLastLoginAt(LocalDateTime lastLoginAt){
-        this.lastLoginAt = lastLoginAt;
-        this.lastLoginRelative = DateTimeUtil.toRelative(lastLoginAt);
-    }
 }

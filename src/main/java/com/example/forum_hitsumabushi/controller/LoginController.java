@@ -65,8 +65,7 @@ public class LoginController {
         }
 
         //ログイン日時を更新する処理
-        user.setLastLoginAt(LocalDateTime.now());
-        userService.saveUser(user);
+        user = userService.updateLastLogin(user);
 
         session.setAttribute("loginUser", user);
         return new ModelAndView("redirect:/forum-hitsumabushi");

@@ -45,10 +45,4 @@ public class UserForm {
 
     //最終ログイン日時を表示するため
     private LocalDateTime lastLoginAt;
-    private String lastLoginRelative;
-
-    public void setLastLoginAt(LocalDateTime lastLoginAt){
-        this.lastLoginAt = lastLoginAt;
-        this.lastLoginRelative = DateTimeUtil.toRelative(lastLoginAt);
-    }
 }

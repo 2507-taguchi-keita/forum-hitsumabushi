@@ -88,8 +88,11 @@ public class HomeController {
             mav.addObject("commentForm", new CommentForm());
         }
 
+        // ログインユーザー情報
         UserForm loginUser = (UserForm) session.getAttribute("loginUser");
-        model.addAttribute("loginUser", loginUser);
+        if (loginUser != null) {
+            model.addAttribute("loginUser", loginUser);
+        }
 
         mav.setViewName("/home");
         return mav;

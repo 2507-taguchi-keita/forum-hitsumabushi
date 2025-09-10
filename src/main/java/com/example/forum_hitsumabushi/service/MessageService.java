@@ -64,6 +64,8 @@ public class MessageService {
         userMessages.setCreatedDate(results.getCreatedDate());
         userMessages.setUpdatedDate(results.getUpdatedDate());
         userMessages.setLastLoginAt(results.getLastLoginAt());
+        String createdRelative = DateTimeUtil.toRelative(results.getCreatedDate());
+        userMessages.setCreatedRelative(createdRelative);
         return userMessages;
     }
 

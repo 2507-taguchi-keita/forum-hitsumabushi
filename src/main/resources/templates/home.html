@@ -47,8 +47,7 @@
         </div>
         <div class="messager">【投稿者】：<span th:text="${message.account}"></span></div>
         <div class="login-time">【最終ログイン】：
-            <p><span th:text="${message.lastLoginRelative}"></span></p>
-            <p>(<span th:if="${message.lastLoginAt}" th:text="${#temporals.format(message.lastLoginAt, 'yyyy/MM/dd HH:mm:ss')}"></span>)</p>
+            <span th:if="${message.lastLoginAt}" th:text="${T(com.example.forum_hitsumabushi.utils.DateTimeUtil).toRelative(message.lastLoginAt)}"></span>
         </div>
         <h3 class="subject" th:text="${message.title}">件名</h3>
         <br>
@@ -77,8 +76,7 @@
                     <p class="comment-datetime">(<span th:if="${comment.createdDate}" th:text="${#temporals.format(comment.createdDate, 'yyyy/MM/dd HH:mm:ss')}"></span>)</p>
                     <p>【投稿者】：<span class="comment-author" th:text="${comment.account}"></span></p>
                     <div class="login-time">【最終ログイン】：
-                        <p><span th:text="${comment.lastLoginRelative}"></span></p>
-                        <p>(<span th:if="${comment.lastLoginAt}" th:text="${#temporals.format(comment.lastLoginAt, 'yyyy/MM/dd HH:mm:ss')}"></span>)</p>
+                        <span th:if="${comment.lastLoginAt}" th:text="${T(com.example.forum_hitsumabushi.utils.DateTimeUtil).toRelative(comment.lastLoginAt)}"></span>
                     </div>
                 </div>
                 <div class="comment-text">
