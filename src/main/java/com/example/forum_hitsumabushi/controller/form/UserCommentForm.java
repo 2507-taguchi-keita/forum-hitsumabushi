@@ -29,4 +29,12 @@ public class UserCommentForm {
         this.createdDate = createdDate;
         this.createdRelative = DateTimeUtil.toRelative(createdDate);
     }
+
+    private LocalDateTime lastLoginAt;
+    private String lastLoginRelative;
+
+    public void setLastLoginAt(LocalDateTime lastLoginAt){
+        this.lastLoginAt = lastLoginAt;
+        this.lastLoginRelative = DateTimeUtil.toRelative(lastLoginAt);
+    }
 }

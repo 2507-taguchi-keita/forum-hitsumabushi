@@ -48,4 +48,7 @@ public class User {
     @Column(name = "updated_date")
     @UpdateTimestamp
     private LocalDateTime updatedDate;
+
+    @Column(name = "last_login_at")
+    private LocalDateTime lastLoginAt;
 }

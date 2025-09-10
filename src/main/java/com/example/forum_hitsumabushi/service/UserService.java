@@ -115,11 +115,6 @@ public class UserService {
         userRepository.save(saveUser);
     }
 
-    // 総務人事かどうかを判定
-    public boolean isSoumuJinji(String account){
-        return userRepository.existsByAccountAndBranchIdAndDepartmentId(account, 1, 2);
-    }
-
     // -------------------------------
     // DtoからFormへ詰め替え（UserBranchDepartment → UserForm）
     private List<UserForm> setUserDtoForm(List<UserBranchDepartment> results) {
@@ -154,6 +149,7 @@ public class UserService {
         user.setIsStopped(reqUser.getIsStopped());
         user.setCreatedDate(LocalDateTime.now());
         user.setUpdatedDate(LocalDateTime.now());
+        user.setLastLoginAt(reqUser.getLastLoginAt());
 
         // ユーザー編集時は「パスワードが空白＝更新しない」となるので、条件分岐でセットする値を使い分け
         if (reqUser.getPassword().isEmpty()) {
@@ -205,6 +201,7 @@ public class UserService {
             user.setIsStopped(result.getIsStopped());
             user.setCreatedDate(result.getCreatedDate());
             user.setUpdatedDate(result.getUpdatedDate());
+            user.setLastLoginAt(result.getLastLoginAt());
             users.add(user);
         }
         return users;
@@ -243,4 +240,5 @@ public class UserService {
         }
         return departments;
     }
+
 }

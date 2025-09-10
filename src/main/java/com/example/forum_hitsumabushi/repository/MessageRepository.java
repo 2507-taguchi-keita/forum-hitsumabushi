@@ -26,7 +26,8 @@ public interface MessageRepository extends JpaRepository<Message, Integer> {
             user.account,
             user.name,
             user.branch.id,
-            user.department.id
+            user.department.id,
+            user.lastLoginAt
         )
         FROM Message message
         JOIN message.user user
