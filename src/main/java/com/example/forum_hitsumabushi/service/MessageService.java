@@ -10,6 +10,7 @@ import com.example.forum_hitsumabushi.repository.entity.User;
 import com.example.forum_hitsumabushi.service.dto.FilterDto;
 import com.example.forum_hitsumabushi.service.dto.UserComment;
 import com.example.forum_hitsumabushi.service.dto.UserMessage;
+import com.example.forum_hitsumabushi.utils.DateTimeUtil;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -61,6 +62,7 @@ public class MessageService {
             userMessage.setCategory(result.getCategory());
             userMessage.setCreatedDate(result.getCreatedDate());
             userMessage.setUpdatedDate(result.getUpdatedDate());
+            userMessage.setLastLoginAt(result.getLastLoginAt());
             userMessages.add(userMessage);
         }
         return userMessages;

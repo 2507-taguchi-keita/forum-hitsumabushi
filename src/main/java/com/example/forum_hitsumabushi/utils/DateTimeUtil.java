@@ -5,12 +5,17 @@ import java.time.LocalDateTime;
 
 public class DateTimeUtil {
     public static String toRelative(LocalDateTime createdAt) {
+        if (createdAt == null) {
+            return "未ログイン";
+        }
         LocalDateTime now = LocalDateTime.now();
         Duration duration = Duration.between(createdAt, now);
 
         long seconds = duration.getSeconds();
 
-        if (seconds < 60) {
+        if (seconds < 1) {
+            return "たった今";
+        } else if (seconds < 60) {
             return seconds + "秒前";
         } else if (seconds < 3600) {
             return (seconds / 60) + "分前";

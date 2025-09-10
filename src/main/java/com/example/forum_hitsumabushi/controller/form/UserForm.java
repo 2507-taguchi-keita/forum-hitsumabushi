@@ -1,5 +1,6 @@
 package com.example.forum_hitsumabushi.controller.form;
 
+import com.example.forum_hitsumabushi.utils.DateTimeUtil;
 import com.example.forum_hitsumabushi.validation.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
@@ -41,4 +42,13 @@ public class UserForm {
 
     // departments
     private String departmentName;
+
+    //最終ログイン日時を表示するため
+    private LocalDateTime lastLoginAt;
+    private String lastLoginRelative;
+
+    public void setLastLoginAt(LocalDateTime lastLoginAt){
+        this.lastLoginAt = lastLoginAt;
+        this.lastLoginRelative = DateTimeUtil.toRelative(lastLoginAt);
+    }
 }

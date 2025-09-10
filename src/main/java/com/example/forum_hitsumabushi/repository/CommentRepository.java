@@ -20,7 +20,8 @@ public interface CommentRepository extends JpaRepository<Comment, Integer> {
         comment.messageId,
         comment.text,
         comment.createdDate,
-        comment.updatedDate
+        comment.updatedDate,
+        user.lastLoginAt
     )
     FROM Comment comment
     JOIN comment.user user

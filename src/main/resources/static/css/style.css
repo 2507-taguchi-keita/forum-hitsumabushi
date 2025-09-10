@@ -17,6 +17,16 @@ body {
 }
 
 /*ホーム画面*/
+.filtered-posts {
+    margin-bottom: 40px;
+}
+
+.message {
+    background-color: aliceblue;
+    margin-bottom: 30px;
+    padding: 25px;
+}
+
 .main-contents .message .subject {
     font-size: 20px;
 }
@@ -27,6 +37,7 @@ body {
 
 .main-contents .message .message-category {
     font-size: 13px;
+    margin-bottom: 10px;
 }
 
 .main-contents .message .message-datetime {
@@ -39,10 +50,21 @@ body {
 
 .comment-meta {
   display: flex;
-  gap: 10px;         /* 日付と投稿者の間に余白 */
-  font-size: 15px;
+  font-size: 13px;
   color: black;
   margin-bottom: 5px;
+}
+
+.comment-meta .comment-date {
+    margin-right: 3px;
+}
+
+.comment-meta .comment-datetime {
+    margin-right: 10px;
+}
+
+.comment-text {
+    margin-bottom: 10px;
 }
 
 .subject {
@@ -52,7 +74,12 @@ body {
 .message-datetime,
 .messager  {
     float: left;
-    padding: 10px;
+    padding: 0 10px 0 0;
+}
+
+.login-time {
+    display: flex;
+    font-size: 13px;
 }
 
 /*新規投稿ボタン*/

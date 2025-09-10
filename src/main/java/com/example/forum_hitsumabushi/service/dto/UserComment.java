@@ -1,5 +1,6 @@
 package com.example.forum_hitsumabushi.service.dto;
 
+import com.example.forum_hitsumabushi.utils.DateTimeUtil;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,4 +23,5 @@ public class UserComment {
     private String text;
     private LocalDateTime createdDate;
     private LocalDateTime updatedDate;
+    private LocalDateTime lastLoginAt;
 }

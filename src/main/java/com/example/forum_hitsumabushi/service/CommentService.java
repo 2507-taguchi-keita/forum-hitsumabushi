@@ -45,6 +45,7 @@ public class CommentService {
             userComment.setText(result.getText());
             userComment.setCreatedDate(result.getCreatedDate());
             userComment.setUpdatedDate(result.getUpdatedDate());
+            userComment.setLastLoginAt(result.getLastLoginAt());
             userComments.add(userComment);
         }
         return userComments;

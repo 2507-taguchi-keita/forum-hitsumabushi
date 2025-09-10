@@ -41,16 +41,19 @@
         </form>
     </div>
     <div class="message" th:each="message : ${messageList}">
-        <hr />
-        <div class="message-datetime">投稿日時：
+        <div class="message-datetime">【投稿日時】：
             <span th:text="${message.createdRelative}"></span>
             (<span th:text="${message.createdDate != null ? #temporals.format(message.createdDate, 'yyyy/MM/dd HH:mm:ss') : ''}"></span>)
         </div>
-        <div class="messager">投稿者：<span th:text="${message.account}"></span></div>
+        <div class="messager">【投稿者】：<span th:text="${message.account}"></span></div>
+        <div class="login-time">【最終ログイン】：
+            <p><span th:text="${message.lastLoginRelative}"></span></p>
+            <p>(<span th:if="${message.lastLoginAt}" th:text="${#temporals.format(message.lastLoginAt, 'yyyy/MM/dd HH:mm:ss')}"></span>)</p>
+        </div>
         <h3 class="subject" th:text="${message.title}">件名</h3>
         <br>
         <div class="main-text"><span th:text="${message.text}"></span></div>
-        <div class="message-category">カテゴリー：<span th:text="${message.category}"></span></div>
+        <div class="message-category">【カテゴリー】：<span th:text="${message.category}"></span></div>
         <div class="message-delete">
             <form th:action="@{/delete/{id}(id=${message.id})}" th:method="post" onsubmit="return confirmDelete();">
                 <input type="hidden" name="_method" value="delete"/>
@@ -70,9 +73,13 @@
             <div class="replies-delete" th:each="comment : ${comments}" th:if="${comment.messageId} == ${message.id}">
                 <hr/>
                 <div class="comment-meta">
-                    返信日時：<span th:text="${comment.createdRelative}"></span>
-                    (<span th:if="${comment.createdDate}" th:text="${#temporals.format(comment.createdDate, 'yyyy/MM/dd HH:mm:ss')}"></span>)
-                    投稿者：<span class="comment-author" th:text="${comment.account}"></span>
+                    <p class="comment-date">【返信日時】：<span th:text="${comment.createdRelative}"></span></p>
+                    <p class="comment-datetime">(<span th:if="${comment.createdDate}" th:text="${#temporals.format(comment.createdDate, 'yyyy/MM/dd HH:mm:ss')}"></span>)</p>
+                    <p>【投稿者】：<span class="comment-author" th:text="${comment.account}"></span></p>
+                    <div class="login-time">【最終ログイン】：
+                        <p><span th:text="${comment.lastLoginRelative}"></span></p>
+                        <p>(<span th:if="${comment.lastLoginAt}" th:text="${#temporals.format(comment.lastLoginAt, 'yyyy/MM/dd HH:mm:ss')}"></span>)</p>
+                    </div>
                 </div>
                 <div class="comment-text">
                     <span th:text="${comment.text}"></span>
@@ -90,12 +97,12 @@
             <form th:action="@{/comment/{messageId}(messageId=${message.id})}" th:object="${commentForm}" method="post">
                 <textarea th:field="*{text}" th:if="${session.messageId != null and session.messageId == message.id}"></textarea>
                 <textarea th:if="${session.messageId == null or session.messageId != message.id}" name="text"></textarea>
-                <br/>
                 <span th:if="${session.messageId != null and session.messageId == message.id}" th:errors="*{text}" style="color:red"></span><br/>
                 <input type="hidden" th:field="*{messageId}" th:value="${message.id}" />
                 <input type="submit" value="返信"/>
             </form>
         </div>
+        <br>
     </div>
 </div>
 <script>

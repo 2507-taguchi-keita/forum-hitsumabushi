@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -62,6 +63,11 @@ public class LoginController {
             mav.addObject("errorCode", errorMessages);
             return mav;
         }
+
+        //ログイン日時を更新する処理
+        user.setLastLoginAt(LocalDateTime.now());
+        userService.saveUser(user);
+
         session.setAttribute("loginUser", user);
         return new ModelAndView("redirect:/forum-hitsumabushi");
     }
