@@ -97,6 +97,24 @@
             </form>
         </div>
     </div>
+
+    <!-- ページネーション -->
+    <div class="pagination">
+        <ul>
+            <li th:if="${messageList.hasPrevious()}">
+                <a th:href="@{/forum-hitsumabushi(page=${messageList.number - 1})}">前へ</a>
+            </li>
+
+            <li th:each="i : ${#numbers.sequence(0, messageList.totalPages - 1)}"
+                th:classappend="${i == messageList.number} ? 'active'">
+                <a th:href="@{/forum-hitsumabushi(page=${i})}" th:text="${i + 1}"></a>
+            </li>
+
+            <li th:if="${messageList.hasNext()}">
+                <a th:href="@{/forum-hitsumabushi(page=${messageList.number + 1})}">次へ</a>
+            </li>
+        </ul>
+    </div>
 </div>
 <script>
     function confirmDelete() {

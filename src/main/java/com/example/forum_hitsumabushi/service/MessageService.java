@@ -12,6 +12,7 @@ import com.example.forum_hitsumabushi.service.dto.UserComment;
 import com.example.forum_hitsumabushi.service.dto.UserMessage;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -34,35 +35,56 @@ public class MessageService {
     CommentRepository commentRepository;
 
     //投稿全件取得処理
-    public List<UserMessageForm> findAllUserMessages(FilterDto filterDto){
+    public Page<UserMessageForm> findAllUserMessages(FilterDto filterDto, int page){
         LocalDateTime start = filterDto.getStartDateTime();
         LocalDateTime end = filterDto.getEndDateTime();
         String category = filterDto.getCategory();
-        Pageable pageable = PageRequest.of(0, 1000);
-        List<UserMessage> results = messageRepository.findAllUserMessages(start, end, category, pageable);
-        List<UserMessageForm> userMessageList = setMessageForm(results);
+        Pageable pageable = PageRequest.of(page, 10);
+
+        Page<UserMessage> results = messageRepository.findAllUserMessages(start, end, category, pageable);
+//        Page<UserMessageForm> userMessageList = setMessageForm(results);
+        Page<UserMessageForm> userMessageList = results.map(this::setMessageForm);
         return userMessageList;
     }
 
     //投稿全件取得処理(EntityからFormへ詰め替え)
-    private List<UserMessageForm> setMessageForm(List<UserMessage> results){
-        List<UserMessageForm> userMessages = new ArrayList<>();
-        for (UserMessage result : results) {
-            UserMessageForm userMessage = new UserMessageForm();
+//    private List<UserMessageForm> setMessageForm(List<UserMessage> results){
+//        List<UserMessageForm> userMessages = new ArrayList<>();
+//        for (UserMessage result : results) {
+//            UserMessageForm userMessage = new UserMessageForm();
+//
+//            userMessage.setId(result.getId());
+//            userMessage.setAccount(result.getAccount());
+//            userMessage.setName(result.getName());
+//            userMessage.setBranchId(result.getBranchId());
+//            userMessage.setDepartmentId(result.getDepartmentId());
+//            userMessage.setUserId(result.getUserId());
+//            userMessage.setTitle(result.getTitle());
+//            userMessage.setText(result.getText());
+//            userMessage.setCategory(result.getCategory());
+//            userMessage.setCreatedDate(result.getCreatedDate());
+//            userMessage.setUpdatedDate(result.getUpdatedDate());
+//            userMessages.add(userMessage);
+//        }
+//        return userMessages;
+//    }
 
-            userMessage.setId(result.getId());
-            userMessage.setAccount(result.getAccount());
-            userMessage.setName(result.getName());
-            userMessage.setBranchId(result.getBranchId());
-            userMessage.setDepartmentId(result.getDepartmentId());
-            userMessage.setUserId(result.getUserId());
-            userMessage.setTitle(result.getTitle());
-            userMessage.setText(result.getText());
-            userMessage.setCategory(result.getCategory());
-            userMessage.setCreatedDate(result.getCreatedDate());
-            userMessage.setUpdatedDate(result.getUpdatedDate());
-            userMessages.add(userMessage);
-        }
+    //投稿全件取得処理(EntityからFormへ詰め替え)
+    private UserMessageForm setMessageForm(UserMessage results){
+        UserMessageForm userMessages = new UserMessageForm();
+
+        userMessages.setId(results.getId());
+        userMessages.setAccount(results.getAccount());
+        userMessages.setName(results.getName());
+        userMessages.setBranchId(results.getBranchId());
+        userMessages.setDepartmentId(results.getDepartmentId());
+        userMessages.setUserId(results.getUserId());
+        userMessages.setTitle(results.getTitle());
+        userMessages.setText(results.getText());
+        userMessages.setCategory(results.getCategory());
+        userMessages.setCreatedDate(results.getCreatedDate());
+        userMessages.setUpdatedDate(results.getUpdatedDate());
+
         return userMessages;
     }
 

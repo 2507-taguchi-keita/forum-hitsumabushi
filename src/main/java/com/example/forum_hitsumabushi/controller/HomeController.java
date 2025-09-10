@@ -8,6 +8,7 @@ import com.example.forum_hitsumabushi.controller.form.UserForm;
 import com.example.forum_hitsumabushi.service.dto.FilterDto;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -45,6 +46,7 @@ public class HomeController {
             Model model,
             HttpSession session,
             @RequestParam(value = "error", required = false) String error,
+            @RequestParam(defaultValue = "0") int page,
             RedirectAttributes redirectAttributes) {
 
         ModelAndView mav = new ModelAndView();
@@ -78,7 +80,7 @@ public class HomeController {
         }
 
         filterDto.setCategory(filterForm.getCategory());
-        List<UserMessageForm> userMessageList = messageService.findAllUserMessages(filterDto);
+        Page<UserMessageForm> userMessageList = messageService.findAllUserMessages(filterDto, page);
 
         mav.addObject("messageList", userMessageList);
         mav.addObject("comments", commentService.findAllUserComment());
