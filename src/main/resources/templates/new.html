@@ -50,6 +50,13 @@
                              th:errors="*{text}"
                              style="color:red;">
                         </div>
+
+                        <!-- NGワードに関するエラーメッセージ -->
+                        <div th:if="${errorCode}">
+                            <p th:text="${errorCode}" style="color:red;"></p>
+                            <p style="color:red;">NGワード：<span th:text="${errorWord}"></span></p>
+                            <br>
+                        </div>
                     </div>
 
                     <!-- 追加ボタン -->
