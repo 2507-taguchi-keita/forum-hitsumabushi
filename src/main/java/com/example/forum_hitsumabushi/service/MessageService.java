@@ -43,7 +43,6 @@ public class MessageService {
         Pageable pageable = PageRequest.of(page, 10);
 
         Page<UserMessage> results = messageRepository.findAllUserMessages(start, end, category, pageable);
-//        Page<UserMessageForm> userMessageList = setMessageForm(results);
         Page<UserMessageForm> userMessageList = results.map(this::setMessageForm);
         return userMessageList;
     }

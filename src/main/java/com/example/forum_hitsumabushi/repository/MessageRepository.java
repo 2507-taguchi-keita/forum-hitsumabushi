@@ -32,7 +32,7 @@ public interface MessageRepository extends JpaRepository<Message, Integer> {
         FROM Message message
         JOIN message.user user
         WHERE message.createdDate BETWEEN :start AND :end
-        AND ((:category IS NULL OR :category = '') OR message.category LIKE CONCAT('%', :category, '%')) 
+        AND ((:category IS NULL OR :category = '') OR message.category LIKE CONCAT('%', :category, '%'))
         ORDER BY message.createdDate DESC
     """)
     Page<UserMessage> findAllUserMessages(
