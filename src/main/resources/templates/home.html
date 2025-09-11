@@ -43,7 +43,6 @@
     <div class="message" th:each="message : ${messageList}">
         <div class="message-datetime">【投稿日時】：
             <span th:text="${message.createdRelative}"></span>
-            (<span th:text="${message.createdDate != null ? #temporals.format(message.createdDate, 'yyyy/MM/dd HH:mm:ss') : ''}"></span>)
         </div>
         <div class="messager">【投稿者】：<span th:text="${message.account}"></span></div>
         <div class="login-time">【最終ログイン】：
