@@ -46,7 +46,7 @@
         </div>
         <div class="messager">【投稿者】：<span th:text="${message.account}"></span></div>
         <div class="login-time">【最終ログイン】：
-            <span th:if="${message.lastLoginAt}" th:text="${T(com.example.forum_hitsumabushi.utils.DateTimeUtil).toRelative(message.lastLoginAt)}"></span>
+            <span th:if="${message.lastLoginAt}" th:text="${message.lastLoginRelative}"></span>
         </div>
         <h3 class="subject" th:text="${message.title}">件名</h3>
         <br>
@@ -74,7 +74,7 @@
                     <p class="comment-date">【返信日時】：<span th:text="${comment.createdRelative}"></span></p>
                     <p>【投稿者】：<span class="comment-author" th:text="${comment.account}"></span></p>
                     <div class="login-time">【最終ログイン】：
-                        <span th:if="${comment.lastLoginAt}" th:text="${T(com.example.forum_hitsumabushi.utils.DateTimeUtil).toRelative(comment.lastLoginAt)}"></span>
+                        <span th:if="${comment.lastLoginAt}" th:text="${comment.lastLoginRelative}"></span>
                     </div>
                 </div>
                 <div class="comment-text">
