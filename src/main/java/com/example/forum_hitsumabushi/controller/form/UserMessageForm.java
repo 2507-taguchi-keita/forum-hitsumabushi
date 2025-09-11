@@ -24,4 +24,5 @@ public class UserMessageForm {
     private String createdRelative;
     private LocalDateTime updatedDate;
     private LocalDateTime lastLoginAt;
+    private String lastLoginRelative;
 }

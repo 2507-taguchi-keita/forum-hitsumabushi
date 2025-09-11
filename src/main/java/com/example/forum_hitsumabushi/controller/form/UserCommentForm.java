@@ -19,7 +19,10 @@ public class UserCommentForm {
     private Integer messageId;
     private String text;
     private LocalDateTime createdDate;
+    //createdDateを〇分前などに変換し、文字列を保持するための専用フィールドとして使用
     private String createdRelative;
     private LocalDateTime updatedDate;
+    //表示頻度や使い方の違いでRelativeフィールドを持たせるかどうかが変わる
     private LocalDateTime lastLoginAt;
+    private String lastLoginRelative;
 }

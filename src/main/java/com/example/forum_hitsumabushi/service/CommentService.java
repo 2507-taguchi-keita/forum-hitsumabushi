@@ -47,8 +47,9 @@ public class CommentService {
             userComment.setCreatedDate(result.getCreatedDate());
             userComment.setUpdatedDate(result.getUpdatedDate());
             userComment.setLastLoginAt(result.getLastLoginAt());
-            String createdRelative = DateTimeUtil.toRelative(result.getCreatedDate());
-            userComment.setCreatedRelative(createdRelative);
+            //createdDateを〇分前という文字列へ変換して、それをcreatedRelativeにセットしている
+            userComment.setCreatedRelative(DateTimeUtil.toRelative(result.getCreatedDate()));
+            userComment.setLastLoginRelative(DateTimeUtil.toRelative(result.getLastLoginAt()));
             userComments.add(userComment);
         }
         return userComments;

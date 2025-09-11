@@ -243,15 +243,15 @@ public class UserService {
     }
 
     public UserForm updateLastLogin(UserForm userForm) {
-        // ログインしたユーザーのIDで検索
+        // ログインしたユーザーのIDで検索（最終ログイン日時を更新するために、DBからユーザーを探す過程が挟まる）
         User entity = userRepository.findById(userForm.getId())
                 .orElseThrow(() -> new RuntimeException("ユーザーが見つかりません"));
 
-        // 今だけ更新
+        // 今だけ更新（usersテーブルの一つのカラムを更新するという処理）
         entity.setLastLoginAt(LocalDateTime.now());
         userRepository.save(entity);
 
-        // Formに反映して返却
+        // Formに反映して返却（Entityの値をFormに詰める）setUserFormEntityの一つだけ版
         userForm.setLastLoginAt(entity.getLastLoginAt());
         return userForm;
     }
