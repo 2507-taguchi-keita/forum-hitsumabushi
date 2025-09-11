@@ -1,7 +1,11 @@
 html, body, div, h1, h2, h3, h4, h5, h6, p,
-table, tbody, thead, tr, th, td {
+table, tbody, thead, tr, th, td, ul, li  {
     margin: 0;
     padding: 0;
+}
+
+ul {
+    list-style-type: none;
 }
 
 .title {
@@ -285,6 +289,34 @@ body {
 .page-login .btn-login:hover {
     cursor: pointer;
     opacity: 0.7;
+}
+
+/* ---------------
+　ホーム画面
+--------------- */
+/* --- エラーメッセージ --- */
+.errorCode {
+    margin-bottom: 20px;
+}
+
+/* --- ページネーション --- */
+.pagination ul {
+    display: flex;
+    justify-content: center;
+}
+
+.pagination ul li {
+    margin-right: 30px;
+}
+
+.pagination ul li:last-of-type {
+    margin-right: 0;
+}
+
+.pagination ul .active a {
+    font-size: 18px;
+    font-weight: bold;
+    text-decoration: none;
 }
 
 /* ---------------

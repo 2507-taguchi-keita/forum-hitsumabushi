@@ -46,7 +46,7 @@ public class HomeController {
             Model model,
             HttpSession session,
             @RequestParam(value = "error", required = false) String error,
-            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(name = "page", defaultValue = "0") String strPage,
             RedirectAttributes redirectAttributes) {
 
         ModelAndView mav = new ModelAndView();
@@ -54,6 +54,12 @@ public class HomeController {
         // 管理者権限フィルターでエラーが返ってきたらエラーメッセージを詰めてリダイレクト
         if ("invalidAccess".equals(error)) {
             redirectAttributes.addFlashAttribute("errorCode", "無効なアクセスです");
+            return new ModelAndView("redirect:/forum-hitsumabushi");
+        }
+
+        // ページ番号の不正アクセスチェック（判定：ページ番号が数字以外）
+        if (!strPage.matches("\\d+")) {
+            redirectAttributes.addFlashAttribute("errorCode", "不正なパラメータが入力されました");
             return new ModelAndView("redirect:/forum-hitsumabushi");
         }
 
@@ -80,6 +86,7 @@ public class HomeController {
         }
 
         filterDto.setCategory(filterForm.getCategory());
+        int page = Integer.parseInt(strPage);
         Page<UserMessageForm> userMessageList = messageService.findAllUserMessages(filterDto, page);
 
         mav.addObject("messageList", userMessageList);
