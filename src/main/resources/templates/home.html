@@ -72,7 +72,6 @@
                 <hr/>
                 <div class="comment-meta">
                     <p class="comment-date">【返信日時】：<span th:text="${comment.createdRelative}"></span></p>
-                    <p class="comment-datetime">(<span th:if="${comment.createdDate}" th:text="${#temporals.format(comment.createdDate, 'yyyy/MM/dd HH:mm:ss')}"></span>)</p>
                     <p>【投稿者】：<span class="comment-author" th:text="${comment.account}"></span></p>
                     <div class="login-time">【最終ログイン】：
                         <span th:if="${comment.lastLoginAt}" th:text="${T(com.example.forum_hitsumabushi.utils.DateTimeUtil).toRelative(comment.lastLoginAt)}"></span>
