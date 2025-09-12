@@ -35,15 +35,15 @@ public class MessageController {
             return new ModelAndView("redirect:/new");
         }
 
-        // NGワードのチェック
+        // NGワードのチェック(新規投稿)
         String text = messageForm.getText();
         String[] keywords = {"hoge", "fuga", "piyo"};
 
         for (String keyword : keywords) {
             if (text.contains(keyword)) {
                 redirectAttributes.addFlashAttribute("messageForm", messageForm);
-                redirectAttributes.addFlashAttribute("errorCode", "不適切な表現(NGワード)が含まれています");
-                redirectAttributes.addFlashAttribute("errorWord", keyword);
+                redirectAttributes.addFlashAttribute("errorWord", "不適切な表現(NGワード)が含まれています");
+                redirectAttributes.addFlashAttribute("NGWord", keyword);
                 return new ModelAndView("redirect:/new");
             }
         }
