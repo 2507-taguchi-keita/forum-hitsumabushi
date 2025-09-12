@@ -52,9 +52,9 @@
                         </div>
 
                         <!-- NGワードに関するエラーメッセージ -->
-                        <div th:if="${errorCode}">
-                            <p th:text="${errorCode}" style="color:red;"></p>
-                            <p style="color:red;">NGワード：<span th:text="${errorWord}"></span></p>
+                        <div th:if="${errorWord}">
+                            <p th:text="${errorWord}" style="color:red;"></p>
+                            <p style="color:red;">NGワード：<span th:text="${NGWord}"></span></p>
                             <br>
                         </div>
                     </div>

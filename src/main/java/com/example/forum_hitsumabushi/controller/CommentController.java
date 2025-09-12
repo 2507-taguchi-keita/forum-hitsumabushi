@@ -31,6 +31,21 @@ public class CommentController {
             redirectAttributes.addFlashAttribute("commentForm", commentForm);
             return new ModelAndView("redirect:/forum-hitsumabushi");
         }
+
+        // NGワードのチェック(コメント)
+        String text = commentForm.getText();
+        String[] keywords = {"hoge", "fuga", "piyo"};
+
+        for (String keyword : keywords) {
+            if (text.contains(keyword)) {
+                session.setAttribute("messageId", messageId);
+                redirectAttributes.addFlashAttribute("commentForm", commentForm);
+                redirectAttributes.addFlashAttribute("errorWord", "不適切な表現(NGワード)が含まれています");
+                redirectAttributes.addFlashAttribute("NGWord", keyword);
+                return new ModelAndView("redirect:/forum-hitsumabushi");
+            }
+        }
+
         // セッションのログインユーザーを取得
         Integer loginUserId = ((UserForm) session.getAttribute("loginUser")).getId();
         // Service に処理を依頼

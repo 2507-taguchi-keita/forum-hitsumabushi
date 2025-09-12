@@ -92,8 +92,18 @@
         <div class="comment-form">
             <form th:action="@{/comment/{messageId}(messageId=${message.id})}" th:object="${commentForm}" method="post">
                 <textarea th:field="*{text}" th:if="${session.messageId != null and session.messageId == message.id}"></textarea>
-                <textarea th:if="${session.messageId == null or session.messageId != message.id}" name="text"></textarea>
+                <textarea th:if="${session.messageId == null or session.messageId != message.id}" name="text"></textarea><br/>
                 <span th:if="${session.messageId != null and session.messageId == message.id}" th:errors="*{text}" style="color:red"></span><br/>
+
+                <!-- NGワードに関するエラーメッセージ -->
+                <div th:if="${errorWord}">
+                    <div th:if="${session.messageId != null and session.messageId == message.id}">
+                        <p th:text="${errorWord}" style="color:red;"></p>
+                        <p style="color:red;">NGワード：<span th:text="${NGWord}"></span></p>
+                        <br/>
+                    </div>
+                </div>
+
                 <input type="hidden" th:field="*{messageId}" th:value="${message.id}" />
                 <input type="submit" value="返信"/>
             </form>
