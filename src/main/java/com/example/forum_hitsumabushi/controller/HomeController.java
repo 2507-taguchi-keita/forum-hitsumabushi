@@ -159,4 +159,10 @@ public class HomeController {
 
         return new ModelAndView("redirect:/forum-hitsumabushi");
     }
+
+    // 追加：APIビュー用の画面遷移
+    @GetMapping("/api-view")
+    public String apiView() {
+        return "api-view"; // templates/api-view.html を返す
+    }
 }

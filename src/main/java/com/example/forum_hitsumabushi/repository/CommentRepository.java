@@ -26,8 +26,28 @@ public interface CommentRepository extends JpaRepository<Comment, Integer> {
     FROM Comment comment
     JOIN comment.user user
     ORDER BY comment.createdDate ASC
-""")
+    """)
     List<UserComment> findAllUserComments();
 
     void deleteByMessageId(Integer id);
+
+    @Query("""
+    SELECT new com.example.forum_hitsumabushi.service.dto.UserComment(
+        comment.id,
+        user.account,
+        user.name,
+        user.branch.id,
+        user.id,
+        comment.messageId,
+        comment.text,
+        comment.createdDate,
+        comment.updatedDate,
+        user.lastLoginAt
+    )
+        FROM Comment comment
+        JOIN comment.user user
+        WHERE comment.messageId = :messageId
+        ORDER BY comment.createdDate ASC
+    """)
+    List<UserComment> findUserCommentsByMessageId(Integer messageId);
 }

@@ -78,4 +78,9 @@ public class CommentService {
     public Comment findCommentById(Integer messageId) {
         return commentRepository.findById(messageId).orElse(null);
     }
+
+    public List<UserCommentForm> findUserCommentsByMessageId(Integer messageId) {
+        List<UserComment> results = commentRepository.findUserCommentsByMessageId(messageId);
+        return setCommentForm(results);
+    }
 }

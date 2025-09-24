@@ -101,6 +101,11 @@ body {
     cursor: pointer;
 }
 
+.button-reload a {
+     display: flex;
+     cursor: pointer;
+}
+
 /*ホーム画面ヘッダー*/
 .header-contents .header {
     display: flex;

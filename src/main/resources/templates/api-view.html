@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+    <title>掲示板(API)</title>
+</head>
+<body>
+<h1>掲示板(API)</h1>
+
+<!-- リロードボタン -->
+<button id="reloadButton">最新の投稿を読み込む</button>
+
+<!-- 投稿一覧 -->
+<div id="postList"></div>
+<div id="pagination"></div>
+
+<script>
+    // 投稿一覧を読み込む
+    function loadMessages(page = 0) {
+        fetch(`/api/messages?page=${page}`)
+            .then(response => response.json())
+            .then(data => {
+                const postListDiv = document.getElementById("postList");
+                postListDiv.innerHTML = "";
+
+                data.content.forEach(post => {
+                    const postElement = document.createElement("div");
+                    postElement.innerHTML = `
+                        <h3>${post.title}</h3>
+                        <p>${post.text}</p>
+                        <span>カテゴリ: ${post.category}</span><br/>
+                        <span>投稿者ID: ${post.userId}</span><br/>
+                        <span>投稿日: ${post.createdDate}</span>
+                        <div id="comments-${post.id}"><em>コメント読み込み中...</em></div>
+                        <hr/>
+                    `;
+                    postListDiv.appendChild(postElement);
+
+                    // コメントを取得して表示
+                    loadComments(post.id);
+                });
+
+                // ページネーションの描画
+                const paginationDiv = document.getElementById("pagination");
+                paginationDiv.innerHTML = "";
+                for (let i = 0; i < data.totalPages; i++) {
+                    const btn = document.createElement("button");
+                    btn.innerText = i + 1;
+                    btn.onclick = () => loadMessages(i);
+                    paginationDiv.appendChild(btn);
+                }
+            })
+            .catch(error => {
+                alert("投稿の取得に失敗しました: " + error);
+            });
+    }
+
+    // コメントを読み込む
+    function loadComments(messageId) {
+        fetch(`/api/messages/${messageId}/comments`)
+            .then(response => response.json())
+            .then(comments => {
+                const commentDiv = document.getElementById(`comments-${messageId}`);
+                commentDiv.innerHTML = "<h4>コメント</h4>";
+
+                if (comments.length === 0) {
+                    commentDiv.innerHTML += "<p>コメントはまだありません</p>";
+                    return;
+                }
+
+                comments.forEach(comment => {
+                    const c = document.createElement("div");
+                    c.innerHTML = `
+                        <p>${comment.text}</p>
+                        <span>投稿者: ${comment.account}</span><br/>
+                        <span>投稿日: ${comment.createdDate}</span>
+                        <hr/>
+                    `;
+                    commentDiv.appendChild(c);
+                });
+            })
+            .catch(error => {
+                const commentDiv = document.getElementById(`comments-${messageId}`);
+                commentDiv.innerHTML = "<p style='color:red'>コメントの取得に失敗しました</p>";
+            });
+    }
+
+    // 初期化
+    document.getElementById("reloadButton").addEventListener("click", () => loadMessages());
+    window.onload = () => loadMessages(0);
+</script>
+</body>
+</html>
+</body>
+</html>
