@@ -18,13 +18,16 @@
 <script>
     // 投稿一覧を読み込む
     function loadMessages(page = 0) {
+        //投稿一覧APIにリクエストを送っている。
         fetch(`/api/messages?page=${page}`)
+            //APIから返ってきたレスポンスをJSONに変換。
             .then(response => response.json())
             .then(data => {
                 const postListDiv = document.getElementById("postList");
                 postListDiv.innerHTML = "";
 
                 data.content.forEach(post => {
+                    //投稿１件分のHTMLを組み立てて、postListDivに追加。
                     const postElement = document.createElement("div");
                     postElement.innerHTML = `
                         <h3>${post.title}</h3>
@@ -90,7 +93,5 @@
     document.getElementById("reloadButton").addEventListener("click", () => loadMessages());
     window.onload = () => loadMessages(0);
 </script>
-</body>
-</html>
 </body>
 </html>

@@ -16,6 +16,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api")
+//投稿とコメントをJavaScriptから扱えるようにするクラス。
 public class MessageApiController {
     @Autowired
     private MessageService messageService;
@@ -25,12 +26,13 @@ public class MessageApiController {
     // 投稿一覧を返すAPI
     @GetMapping("/messages")
     public Page<UserMessageForm> getMessages(
+            //文字列型として受け取り、あとで数値に変換する。required=falseで、指定されなくてもエラーにならない
             @RequestParam(name="page", required = false) String strPage,
             @RequestParam(required = false) String category,
             @RequestParam(required = false) String startDate,
             @RequestParam(required = false) String endDate) {
 
-        // デフォルト値とバリデーション
+        // デフォルト値とバリデーション　pageパラメータが指定されてなかったら０ページ目をデフォルトとする。
         if (strPage == null) {
             strPage = "0"; // デフォルトで0ページ目
         } else if (!strPage.trim().matches("\\d+")){
@@ -38,7 +40,7 @@ public class MessageApiController {
         }
         int page = Integer.parseInt(strPage);
 
-        // DTOを組み立てる
+        // DTOを組み立てる。投稿を検索する際に必要な条件をまとめる。
         FilterDto filterDto = new FilterDto();
 
         if (startDate != null) {
@@ -55,13 +57,14 @@ public class MessageApiController {
 
         filterDto.setCategory(category);
 
-        // Service呼び出し
+        // Service呼び出して、DBから投稿一覧を取得。ページング付きで返ってくる。結果はSpringがJSONに変換してレスポンスになる。
         return messageService.findAllUserMessages(filterDto, page);
     }
 
     //コメントも返すAPI
     @GetMapping("/messages/{id}/comments")
     public List<UserCommentForm> getComments(@PathVariable int id){
+        //投稿IDに紐づくコメント一覧を返す。
         return commentService.findUserCommentsByMessageId(id);
     }
 }
