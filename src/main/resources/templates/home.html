@@ -55,6 +55,12 @@
         <br>
         <div class="main-text"><span th:text="${message.text}"></span></div>
         <div class="message-category">【カテゴリー】：<span th:text="${message.category}"></span></div>
+        <div class="like-section">
+            <button th:id="|like-btn-message-${message.id}|"
+                    type="button"
+                    th:onclick="|likeItem('message', ${message.id})|">👍</button>
+            <span th:id="|like-count-message-${message.id}|" th:text="${message.likeCount}">0</span>
+        </div>
         <div class="message-delete">
             <form th:action="@{/delete/{id}(id=${message.id})}" th:method="post" onsubmit="return confirmDelete();">
                 <input type="hidden" name="_method" value="delete"/>
@@ -82,6 +88,12 @@
                 </div>
                 <div class="comment-text">
                     <span th:text="${comment.text}"></span>
+                </div>
+                <div class="like-section">
+                    <button th:id="|like-btn-comment-${comment.id}|"
+                            type="button"
+                            th:onclick="|likeItem('comment', ${comment.id})|">👍</button>
+                    <span th:id="|like-count-comment-${comment.id}|" th:text="${comment.likeCount}">0</span>
                 </div>
                 <div th:if="${loginUser.id == comment.userId}" class="comment-delete">
                     <form th:action="@{/comment/delete/{id}(id=${comment.id})}" method="post" onsubmit="return confirmDelete();">
@@ -137,5 +149,8 @@
         return confirm("本当に削除しますか？");
     }
 </script>
+<script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/stompjs@2.3.3/lib/stomp.min.js"></script>
+<script src="/js/like.js"></script>
 </body>
 </html>

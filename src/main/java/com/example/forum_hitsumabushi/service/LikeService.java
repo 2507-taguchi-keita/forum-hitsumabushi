@@ -28,7 +28,6 @@ public class LikeService {
         if (targetType.equals("comment") && !commentRepository.existsById(targetId)) {
             throw new MessageApiException("対象のコメントが存在しません");
         }
-
         // 重複チェック
         if (likeRepository.existsByTargetTypeAndTargetIdAndUserId(targetType, targetId, userId)) {
             throw new MessageApiException("すでにいいね済みです");

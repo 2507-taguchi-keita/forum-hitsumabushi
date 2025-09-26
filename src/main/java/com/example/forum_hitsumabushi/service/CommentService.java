@@ -3,6 +3,7 @@ package com.example.forum_hitsumabushi.service;
 import com.example.forum_hitsumabushi.controller.form.CommentForm;
 import com.example.forum_hitsumabushi.controller.form.UserCommentForm;
 import com.example.forum_hitsumabushi.repository.CommentRepository;
+import com.example.forum_hitsumabushi.repository.LikeRepository;
 import com.example.forum_hitsumabushi.repository.MessageRepository;
 import com.example.forum_hitsumabushi.repository.UserRepository;
 import com.example.forum_hitsumabushi.repository.entity.Comment;
@@ -25,11 +26,19 @@ public class CommentService {
     private CommentRepository commentRepository;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private LikeRepository likeRepository;
 
     //返信コメント全件取得
     public List<UserCommentForm> findAllUserComment() {
         List<UserComment> results = commentRepository.findAllUserComments();
-        return setCommentForm(results);
+        List<UserCommentForm> userComments = setCommentForm(results);
+        //各コメントに対していいね数をセット
+        for (UserCommentForm c : userComments) {
+            int count = likeRepository.countByTargetTypeAndTargetId("comment", c.getId());
+            c.setLikeCount(count);
+        }
+        return userComments;
     }
 
     //返信コメント全件取得処理(EntityからFormへ詰め替え)
@@ -81,6 +90,12 @@ public class CommentService {
 
     public List<UserCommentForm> findUserCommentsByMessageId(Integer messageId) {
         List<UserComment> results = commentRepository.findUserCommentsByMessageId(messageId);
-        return setCommentForm(results);
+        List<UserCommentForm> userComments = setCommentForm(results);
+        //各コメントに対していいね数をセット
+        for (UserCommentForm c : userComments) {
+            int count = likeRepository.countByTargetTypeAndTargetId("comment", c.getId());
+            c.setLikeCount(count);
+        }
+        return userComments;
     }
 }

@@ -2,6 +2,7 @@ package com.example.forum_hitsumabushi.service;
 
 import com.example.forum_hitsumabushi.controller.form.*;
 import com.example.forum_hitsumabushi.repository.CommentRepository;
+import com.example.forum_hitsumabushi.repository.LikeRepository;
 import com.example.forum_hitsumabushi.repository.MessageRepository;
 import com.example.forum_hitsumabushi.repository.UserRepository;
 import com.example.forum_hitsumabushi.repository.entity.Comment;
@@ -34,6 +35,8 @@ public class MessageService {
     MessageRepository messageRepository;
     @Autowired
     CommentRepository commentRepository;
+    @Autowired
+    LikeRepository likeRepository;
 
     //投稿全件取得処理
     public Page<UserMessageForm> findAllUserMessages(FilterDto filterDto, int page){
@@ -44,6 +47,11 @@ public class MessageService {
 
         Page<UserMessage> results = messageRepository.findAllUserMessages(start, end, category, pageable);
         Page<UserMessageForm> userMessageList = results.map(this::setMessageForm);
+        // 各投稿に対していいね数をセット
+        userMessageList.forEach(msg -> {
+            int count = likeRepository.countByTargetTypeAndTargetId("message", msg.getId());
+            msg.setLikeCount(count);
+        });
         return userMessageList;
     }
 

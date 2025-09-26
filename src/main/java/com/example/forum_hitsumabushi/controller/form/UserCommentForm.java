@@ -25,4 +25,5 @@ public class UserCommentForm {
     //表示頻度や使い方の違いでRelativeフィールドを持たせるかどうかが変わる
     private LocalDateTime lastLoginAt;
     private String lastLoginRelative;
+    private Integer likeCount;
 }

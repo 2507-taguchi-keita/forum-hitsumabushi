@@ -210,6 +210,44 @@ body {
     background-color: #ffb6c1;
 }
 
+/*いいねボタン*/
+.message .like-section button {
+    margin-bottom: 20px;
+    cursor: pointer;
+
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid #888;
+    background-color: #fff;
+    color: #444;
+    font-size: 18px;
+    line-height: 36px;
+    text-align: center;
+
+    transition: all 0.15s ease-in-out;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.message .like-section button:hover {
+    background-color: #f5f5f5;
+    transform: scale(1.08);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.message .like-section button:active {
+    background-color: #e0e0e0;
+    transform: scale(0.95);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+/* いいねボタン 押した後 */
+.message .like-section button.liked {
+    background-color: #007BFF; /* 青背景 */
+    color: #fff;              /* アイコン文字を白に */
+    border-color: #007BFF;
+    font-weight: bold;
+}
+
 /*返信ボタン*/
 .comment-form form input[type="submit"] {
     background-color: #fff;

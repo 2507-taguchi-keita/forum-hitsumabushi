@@ -25,4 +25,5 @@ public class UserMessageForm {
     private LocalDateTime updatedDate;
     private LocalDateTime lastLoginAt;
     private String lastLoginRelative;
+    private Integer likeCount;
 }
