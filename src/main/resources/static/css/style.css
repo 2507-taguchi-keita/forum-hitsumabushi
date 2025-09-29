@@ -173,6 +173,31 @@ body {
     transition: all 0.2s;
 }
 
+/*掲示板(API)ボタン*/
+.button-api a {
+  display: inline-block;
+  padding: 0.5em 1em;
+  text-decoration: none;
+  background: #f7f7f7;
+  border: solid 3px #543618;
+  color: #543618;
+  font-weight: bold;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.29);
+  border-radius: 50px;
+  margin-bottom: 10px;
+}
+
+.button-api a:hover {
+    transform: translate3d(0.2rem, 0.2rem, 0);
+    box-shadow: none;
+    opacity: 1;
+    transition: all 0.2s;
+}
+
+.button-api a:active {
+  box-shadow: inset 0 0 2px rgba(128, 128, 128, 0.1);
+  transform: translateY(2px);
+}
 
 /* --- 本文 --- */
 .main-contents .message .main-text span {

@@ -31,7 +31,6 @@ public class LikeController {
         }
         Integer userId = loginUser.getId();
         int count = likeService.addLike(targetType, targetId, userId);
-        System.out.println("Like登録 target=" + targetType + " id=" + targetId + " userId=" + userId);
         Map<String, Object> response = Map.of(
                 "targetType", targetType,
                 "targetId", targetId,
@@ -39,7 +38,6 @@ public class LikeController {
         );
         // 登録成功時にWebSocket通知を飛ばす
         messagingTemplate.convertAndSend("/topic/likes", response);
-        System.out.println("WebSocket通知送信: " + response);
         return ResponseEntity.ok(response);
     }
 

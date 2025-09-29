@@ -7,5 +7,5 @@ import lombok.Setter;
 @Setter
 public class LikeForm {
     private String targetType;
-    private Long targetId;
+    private Integer targetId;
 }

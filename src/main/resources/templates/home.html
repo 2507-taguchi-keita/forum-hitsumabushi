@@ -31,9 +31,6 @@
     <div class="button-new">
         <a th:href="@{/new}"><span>新規投稿</span></a>
     </div>
-    <div class="button-reload">
-        <a th:href="@{/api-view}"><span>掲示板(API)</span></a>
-    </div>
     <br>
     <div class="filtered-posts">
         <form th:action="@{/forum-hitsumabushi}" method="get" th:object="${filterForm}">
@@ -42,6 +39,9 @@
             <label>カテゴリー <input type="text" name="category" th:field="*{category}" placeholder="部分一致"></label>
             <button type="submit">絞り込み</button>
         </form>
+    </div>
+    <div class="button-api">
+        <a th:href="@{/api-view}"><span>掲示板(API)</span></a>
     </div>
     <div class="message" th:each="message : ${messageList}">
         <div class="message-datetime">【投稿日時】：
