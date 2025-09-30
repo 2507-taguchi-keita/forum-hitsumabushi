@@ -22,12 +22,12 @@ public class LikeService {
     //いいねを登録
     public int addLike(String targetType, Integer targetId, Integer userId) {
         // 存在チェック
-        if (targetType.equals("message") && !messageRepository.existsById(targetId)) {
-            throw new MessageApiException("対象の投稿が存在しません");
-        }
-        if (targetType.equals("comment") && !commentRepository.existsById(targetId)) {
-            throw new MessageApiException("対象のコメントが存在しません");
-        }
+//        if (targetType.equals("message") && !messageRepository.existsById(targetId)) {
+//            throw new MessageApiException("対象の投稿が存在しません");
+//        }
+//        if (targetType.equals("comment") && !commentRepository.existsById(targetId)) {
+//            throw new MessageApiException("対象のコメントが存在しません");
+//        }
         // 重複チェック
         if (likeRepository.existsByTargetTypeAndTargetIdAndUserId(targetType, targetId, userId)) {
             throw new MessageApiException("すでにいいね済みです");
