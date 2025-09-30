@@ -32,6 +32,7 @@
                                 <div class="api-post-user">
                                     <span class="api-username">${post.account}</span>
                                     <span class="api-date">${new Date(post.createdDate).toLocaleString()}</span>
+                                    ${post.category ? `<span class="api-category-badge">${post.category}</span>` : ""}
                                 </div>
                             </div>
                             <div class="api-post-content">

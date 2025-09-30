@@ -41,7 +41,7 @@
         </form>
     </div>
     <div class="button-api">
-        <a th:href="@{/api-view}"><span>掲示板(API)</span></a>
+        <a th:if="${loginUser.departmentId == 1}" th:href="@{/api-view}"><span>掲示板(API)</span></a>
     </div>
     <div class="message" th:each="message : ${messageList}">
         <div class="message-datetime">【投稿日時】：

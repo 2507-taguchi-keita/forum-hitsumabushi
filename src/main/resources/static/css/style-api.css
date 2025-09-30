@@ -33,6 +33,24 @@ body.api-view {
     color: #333;
 }
 
+/* 日付とカテゴリを横並びにして少し間隔を空ける */
+.api-post-user {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* カテゴリの小さなバッジ */
+.api-category-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  font-size: 0.8em;
+  color: #0a58ca;
+  background: #e9f2ff;
+  border: 1px solid #bcd6ff;
+  border-radius: 999px;
+}
+
 .api-date {
     font-size: 0.8em;
     color: #888;
